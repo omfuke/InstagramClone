@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(Billabong.ttf);
+}
+
+h1 {
+  font-family: myFirstFont;
+  font-size: 30px;
+  padding: 22px auto;
+}

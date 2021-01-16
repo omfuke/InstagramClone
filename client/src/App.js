@@ -1,11 +1,14 @@
 import "./App.css";
+import Auth from "./component/Auth/Auth";
 
 import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App = () => {
   return (
     <Router>
-      <div className="bg-red-500">Hello world</div>
+      <Switch>
+        <Route exact path="/" component={Auth} />
+      </Switch>
     </Router>
   );
 };
