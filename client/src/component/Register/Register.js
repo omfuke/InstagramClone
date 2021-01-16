@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
+import axios from "axios";
 
-const Register = () => {
+const Register = async () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
