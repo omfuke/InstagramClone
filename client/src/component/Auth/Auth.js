@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import "./Auth.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../actions/auth";
 
-const Auth = () => {
+const Auth = ({ login, isAuthencticated }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const onSubmit = () => {
-    console.log(formData);
-  };
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const { email, password } = formData;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(email, password);
+  };
+
+  if (isAuthencticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div>
@@ -39,7 +47,7 @@ const Auth = () => {
             placeholder="password"
           ></input>
         </div>
-        <button onClick={onSubmit}>Log In</button>
+        <button onClick={(e) => onSubmit(e)}>Log In</button>
       </div>
       <div className="container1">
         <div>
@@ -53,4 +61,8 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+const mapStateToProps = (state) => {
+  return { isAuthencticated: state.auth.isAuthencticated };
+};
+
+export default connect(mapStateToProps, { login })(Auth);

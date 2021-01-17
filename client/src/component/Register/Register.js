@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import "./Register.css";
-import axios from "axios";
+import { connect } from "react-redux";
+import { register } from "../../actions/auth";
 
-const Register = async () => {
+const Register = ({ register, isAuthencticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,9 +16,15 @@ const Register = async () => {
   };
   const { name, email, password } = formData;
 
-  const onSubmit = () => {
-    console.log(formData);
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    register({ name, email, password });
   };
+
+  if (isAuthencticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div>
@@ -34,32 +41,35 @@ const Register = async () => {
           Sign up to see photos and videos from your friends.
         </p>
         <div className="box">
-          <input
-            className="input"
-            type="email"
-            name="email"
-            value={email}
-            placeholder="email"
-            onChange={(e) => onChange(e)}
-          ></input>
-          <input
-            className="input"
-            type="text"
-            name="name"
-            value={name}
-            placeholder="username"
-            onChange={(e) => onChange(e)}
-          ></input>
-          <input
-            className="input"
-            type="password"
-            name="password"
-            value={password}
-            placeholder="password"
-            onChange={(e) => onChange(e)}
-          ></input>
+          <form onSubmit={(e) => onSubmit(e)}>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              value={email}
+              placeholder="email"
+              onChange={(e) => onChange(e)}
+            ></input>
+            <input
+              className="input"
+              type="text"
+              name="name"
+              value={name}
+              placeholder="username"
+              onChange={(e) => onChange(e)}
+            ></input>
+            <input
+              className="input"
+              type="password"
+              name="password"
+              value={password}
+              placeholder="password"
+              onChange={(e) => onChange(e)}
+            ></input>
+
+            <button type="submit">Sign up</button>
+          </form>
         </div>
-        <button onClick={onSubmit}>Sign up</button>
         <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
           By signing up, you agree to our Terms , Data Policy and Cookies Policy
           .
@@ -76,4 +86,9 @@ const Register = async () => {
     </div>
   );
 };
-export default Register;
+
+const mapStateToProps = (state) => {
+  return { isAuthencticated: state.auth.isAuthencticated };
+};
+
+export default connect(mapStateToProps, { register })(Register);
