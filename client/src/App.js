@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
+import Dashboard from "./component/Dashboard/Dashboard";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -23,6 +24,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Auth} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </Provider>

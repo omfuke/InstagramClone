@@ -5,6 +5,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
 } from "../actions/types";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
@@ -71,4 +72,8 @@ export const login = (email, password) => async (dispatch) => {
     console.log(err);
     dispatch({ type: LOGIN_FAIL });
   }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
