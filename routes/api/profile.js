@@ -11,7 +11,7 @@ router.get("/me", auth, async (req, res) => {
     const profile = await Profile.findOne({ user: req.user.id });
 
     if (profile) {
-      res.status(200).json(profile);
+      return res.status(200).json(profile);
     }
 
     res.status(400).json({ msg: "no profile found" });
