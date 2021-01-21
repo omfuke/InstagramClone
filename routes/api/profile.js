@@ -31,12 +31,17 @@ router.post("/", auth, async (req, res) => {
   try {
     let profile = await Profile.findOne({ user: req.user.id });
     if (profile) {
-      return res.json({ msg: "already exist user" });
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        userProfile,
+        { new: true }
+      );
+      return res.status(200).json({ msg: "user updated" });
     }
     profile = new Profile(userProfile);
     await profile.save();
 
-    res.send(400).send(profile);
+    res.status(200).send(profile);
   } catch {
     res.status(500).json({ msg: "server error" });
   }
