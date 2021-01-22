@@ -15,3 +15,22 @@ export const getCurrentProfile = () => async (dispatch) => {
     });
   }
 };
+
+export const createProfile = (formData, history, edit = false) => async (
+  dispatch
+) => {
+  const config = {
+    headers: {
+      Content_Type: "application/json",
+    },
+  };
+
+  try {
+    const res = await axios.post("/api/profile", formData, config);
+
+    dispatch({ type: GET_PROFILE, payload: res });
+    history.push("/dashboard");
+  } catch (err) {
+    console.log(err);
+  }
+};

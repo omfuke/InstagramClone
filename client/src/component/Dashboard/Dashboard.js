@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { logout, clearProfile } from "../../actions/auth";
 import { connect } from "react-redux";
 import spinner from "./833.gif";
-import { Redirect } from "react-router";
+import { Redirect, Link } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profile";
 
 const Dashboard = ({
@@ -32,10 +32,18 @@ const Dashboard = ({
       {loading ? (
         <img src={spinner} width="100" height="100" alt="om" />
       ) : (
-        <h1>hello</h1>
+        <div>
+          <h1>hello</h1>
+        </div>
       )}
 
-      {!profile ? <p>pls create profile</p> : <p>{profile.name}</p>}
+      {!profile ? (
+        <Link to="/create-profile" className="Button">
+          Create Profile
+        </Link>
+      ) : (
+        <p>{profile.name}</p>
+      )}
     </div>
   );
 };
