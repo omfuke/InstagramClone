@@ -34,6 +34,7 @@ const Dashboard = ({
       ) : (
         <div>
           <h1>hello</h1>
+          {profile && <h1>{profile.name}</h1>}
         </div>
       )}
 
@@ -42,7 +43,9 @@ const Dashboard = ({
           Create Profile
         </Link>
       ) : (
-        <p>{profile.name}</p>
+        <Link to="/edit-profile" className="Button">
+          Edit Profile
+        </Link>
       )}
     </div>
   );

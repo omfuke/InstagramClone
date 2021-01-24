@@ -1,4 +1,4 @@
-import { CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR } from "./types";
+import { GET_PROFILE, PROFILE_ERROR } from "./types";
 import axios from "axios";
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -27,7 +27,6 @@ export const createProfile = (formData, history, edit = false) => async (
 
   try {
     const res = await axios.post("/api/profile", formData, config);
-
     dispatch({ type: GET_PROFILE, payload: res });
     history.push("/dashboard");
   } catch (err) {
