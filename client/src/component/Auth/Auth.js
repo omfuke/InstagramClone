@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Auth.css";
+import "../../index.css";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
@@ -26,9 +26,9 @@ const Auth = ({ login, isAuthencticated }) => {
   }
 
   return (
-    <div>
+    <div className="container0">
       <div className="container">
-        <h1>Instagram Clone</h1>
+        <h1 className="logo">Instagram Clone</h1>
         <div className="box">
           <input
             type="email"
