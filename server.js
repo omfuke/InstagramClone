@@ -5,7 +5,7 @@ const app = express();
 connectDB();
 
 app.use(express.json({ extended: false }));
-
+app.use(express.static("uploads"));
 app.get("/", (req, res) => res.send("API RUNNING"));
 
 app.use("/api/users", require("./routes/api/users"));
