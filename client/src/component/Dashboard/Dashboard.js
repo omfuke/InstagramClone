@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { logout, clearProfile } from "../../actions/auth";
 import { connect } from "react-redux";
 import spinner from "./833.gif";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profile";
 import Navbar from "../../layout/Navbar";
 
@@ -21,7 +21,7 @@ const Dashboard = ({
 
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   if (!isAuthencticated) {
     return <Redirect to="/" />;

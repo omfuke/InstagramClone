@@ -22,7 +22,7 @@ const EditProfile = ({
       name: profile.name,
       bio: profile.bio,
     });
-  }, [loading]);
+  }, [loading, profile.name, profile.bio]);
 
   const onSubmit = (e) => {
     e.preventDefault();
