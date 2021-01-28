@@ -4,7 +4,9 @@ import axios from "axios";
 export const getCurrentProfile = () => async (dispatch) => {
   try {
     const profile = await axios.get("/api/profile/me");
-    dispatch({ type: GET_PROFILE, payload: profile.data });
+    const post = await axios.get("/api/post");
+
+    dispatch({ type: GET_PROFILE, payload: profile.data, data: post.data });
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,

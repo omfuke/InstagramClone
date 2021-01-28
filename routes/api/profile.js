@@ -24,8 +24,6 @@ const fileFlter = (req, file, cb) => {
 
 const upload = multer({ storage: storage, fileFilter: fileFlter });
 
-// @Route /api/user/me
-
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });

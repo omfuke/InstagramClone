@@ -5,7 +5,7 @@ import { getCurrentProfile } from "../actions/profile";
 import "./profile.css";
 import Upload from "./Upload";
 
-const Profile = ({ profile, getCurrentProfile }) => {
+const Profile = ({ profile, getCurrentProfile, post }) => {
   const [image, setImage] = useState(false);
 
   useEffect(() => {
@@ -27,8 +27,15 @@ const Profile = ({ profile, getCurrentProfile }) => {
               onClick={() => setImage(!image)}
             ></i>
           </div>
-          <p>hello {profile.name}</p>
-          <p>hello {profile.bio}</p>
+          <h1>hello</h1>
+          <p> {profile.name}</p>
+          <p> {profile.bio}</p>
+          <p>followers: {profile.followers.length}</p>
+          <p>following: {profile.following.length}</p>
+          <h2>Posts:</h2>
+
+          <div>{post.text}</div>
+          <p>likes: {post.likes.length}</p>
         </div>
       ) : (
         <p>No profile</p>
@@ -42,7 +49,7 @@ const Profile = ({ profile, getCurrentProfile }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { profile: state.profile.profile };
+  return { profile: state.profile.profile, post: state.profile.posts };
 };
 
 export default connect(mapStateToProps, { getCurrentProfile })(Profile);
