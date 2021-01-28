@@ -24,6 +24,15 @@ const fileFlter = (req, file, cb) => {
 
 const upload = multer({ storage: storage, fileFilter: fileFlter });
 
+router.get("/", auth, async (req, res) => {
+  try {
+    const allProfile = await Profile.find({});
+    return res.json(allProfile);
+  } catch {
+    res.status(500).json({ msg: "server error" });
+  }
+});
+
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
