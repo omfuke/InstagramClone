@@ -33,6 +33,16 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+router.get("/:name", auth, async (req, res) => {
+  const name = req.params.name;
+  try {
+    const userProfile = await Profile.findOne({ name: name });
+    return res.json(userProfile);
+  } catch {
+    res.status(500).json({ msg: "server error" });
+  }
+});
+
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });

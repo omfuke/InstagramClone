@@ -1,4 +1,9 @@
-import { GET_PROFILE, PROFILE_ERROR, GET_PROFILES } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  GET_PROFILES,
+  GET_OTHER_PROFILE,
+} from "./types";
 import axios from "axios";
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -26,6 +31,21 @@ export const getAllProfiles = () => async (dispatch) => {
     const res = await axios.get("/api/profile");
 
     dispatch({ type: GET_PROFILES, payload: res.data });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+  }
+};
+
+export const getOtherProfile = (name) => async (dispatch) => {
+  try {
+    const res = await axios(`/api/profile/${name}`);
+    dispatch({ type: GET_OTHER_PROFILE, payload: res.data });
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,

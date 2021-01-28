@@ -13,6 +13,7 @@ import EditProfile from "./layout/EditProfile";
 import Profile from "./layout/Profile";
 import AllProfiles from "./layout/AllProfiles";
 import "bootstrap/dist/css/bootstrap.min.css";
+import OtherProfile from "./OtherUsers/OtherProfile";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -34,6 +35,7 @@ const App = () => {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/edit-profile" component={EditProfile} />
           <Route exact path="/all-profiles" component={AllProfiles} />
+          <Route exact path="/profile/:name" component={OtherProfile} />
         </Switch>
       </Router>
     </Provider>
