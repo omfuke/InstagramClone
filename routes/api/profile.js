@@ -26,18 +26,10 @@ const upload = multer({ storage: storage, fileFilter: fileFlter });
 
 router.get("/", auth, async (req, res) => {
   try {
+    const profile = await Profile.findOne({ user: req.user.id });
     const allProfile = await Profile.find({});
-    return res.json(allProfile);
-  } catch {
-    res.status(500).json({ msg: "server error" });
-  }
-});
-
-router.get("/:name", auth, async (req, res) => {
-  const name = req.params.name;
-  try {
-    const userProfile = await Profile.findOne({ name: name });
-    return res.json(userProfile);
+    const result = allProfile.filter((p) => p.name !== profile.name);
+    return res.json(result);
   } catch {
     res.status(500).json({ msg: "server error" });
   }
@@ -54,6 +46,16 @@ router.get("/me", auth, async (req, res) => {
     res.status(200).json(profile);
   } catch {
     res.status(500).send("Server Eroor");
+  }
+});
+
+router.get("/:name", auth, async (req, res) => {
+  const name = req.params.name;
+  try {
+    const userProfile = await Profile.findOne({ name: name });
+    return res.json(userProfile);
+  } catch {
+    res.status(500).json({ msg: "server error" });
   }
 });
 

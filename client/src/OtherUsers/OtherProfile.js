@@ -5,7 +5,7 @@ import { getOtherProfile } from "../actions/profile";
 const OtherProfile = ({ match, profile, getOtherProfile }) => {
   useEffect(() => {
     getOtherProfile(match.params.name);
-  }, [getOtherProfile]);
+  }, [getOtherProfile, match.params.name]);
 
   return (
     <div>
@@ -17,8 +17,8 @@ const OtherProfile = ({ match, profile, getOtherProfile }) => {
           <p>following: {profile.otherProfile.following.length}</p>
         </div>
       ) : (
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       )}
     </div>
