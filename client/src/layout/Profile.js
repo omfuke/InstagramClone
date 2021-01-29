@@ -7,6 +7,7 @@ import Upload from "./Upload";
 
 const Profile = ({ profile, getCurrentProfile, post }) => {
   const [image, setImage] = useState(false);
+  const [dp, setDp] = useState(null);
 
   useEffect(() => {
     getCurrentProfile();
@@ -16,35 +17,47 @@ const Profile = ({ profile, getCurrentProfile, post }) => {
     setImage(!image);
   };
 
+  const dpHandler = (url) => {
+    setDp(url);
+  };
+
   return (
-    <div className="profile-page">
+    <>
       <Navbar />
-      {profile ? (
-        <div className="profile">
-          <div className="profile-img">
-            <i
-              className="fal fa-camera fa-3x"
-              onClick={() => setImage(!image)}
-            ></i>
+      {profile && (
+        <div>
+          <div>
+            {dp ? (
+              <div
+                onClick={() => setImage(!image)}
+                className="profile-img"
+                style={{ background: `url("${dp}") no-repeat center/cover` }}
+              ></div>
+            ) : (
+              <div className="profile-img" onClick={() => setImage(!image)}>
+                <i className="fal fa-camera fa-3x"></i>
+              </div>
+            )}
+
+            <div className="profile">
+              <h3> {profile.name}</h3>
+              <p> {profile.bio}</p>
+              <p>followers: {profile.followers.length}</p>
+              <p>following: {profile.following.length}</p>
+            </div>
           </div>
-          <h1>hello</h1>
-          <p> {profile.name}</p>
-          <p> {profile.bio}</p>
-          <p>followers: {profile.followers.length}</p>
-          <p>following: {profile.following.length}</p>
+
           <h2>Posts:</h2>
 
           <div>{post.text}</div>
           <p>likes: {post.likes.length}</p>
         </div>
-      ) : (
-        <p>No profile</p>
       )}
-      {image && <Upload closeEvent={closeEvent} />}
+      {image && <Upload dpHandler={dpHandler} closeEvent={closeEvent} />}
       {image && (
         <div className="overlay" onClick={() => setImage(!setImage)}></div>
       )}
-    </div>
+    </>
   );
 };
 
