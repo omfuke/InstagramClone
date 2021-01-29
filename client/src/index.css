@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .Button {
   background-color: rgb(84, 201, 84);
   border: none;

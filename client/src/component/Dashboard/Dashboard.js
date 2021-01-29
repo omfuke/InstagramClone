@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { logout, clearProfile } from "../../actions/auth";
 import { connect } from "react-redux";
 import spinner from "./833.gif";
 import { Redirect, Link } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profile";
 import Navbar from "../../layout/Navbar";
+import Spinner from "../../Spinner/Spinner";
 
 const Dashboard = ({
   logout,
@@ -27,8 +28,12 @@ const Dashboard = ({
     return <Redirect to="/" />;
   }
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
-    <div>
+    <Fragment>
       <Navbar />
       <div className="posts">
         <h1 onClick={logOutHandler}>Logout</h1>
@@ -51,7 +56,7 @@ const Dashboard = ({
           </Link>
         )}
       </div>
-    </div>
+    </Fragment>
   );
 };
 
