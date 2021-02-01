@@ -49,6 +49,35 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
+router.post("/followProfile", auth, async (req, res) => {
+  try {
+    const otherProfile = req.body.user;
+    const profile = await Profile.findOne({ user: req.user.id });
+    const newProf = profile;
+    console.log(newProf);
+    if (otherProfile == profile.following[0].user) {
+      console.log("yess");
+    }
+
+    newProf.following.forEach((element) => {
+      console.log(element);
+    });
+
+    if (arr) {
+      console.log("already exist");
+      return res.status(200).json({ msg: "already exist" });
+    }
+
+    profile.following.unshift({ user: otherProfile });
+
+    await profile.save();
+
+    res.status(200).json({ msg: "done" });
+  } catch {
+    res.status(500).send("Server Eroor");
+  }
+});
+
 router.get("/:name", auth, async (req, res) => {
   const name = req.params.name;
   try {

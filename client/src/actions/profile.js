@@ -3,6 +3,7 @@ import {
   PROFILE_ERROR,
   GET_PROFILES,
   GET_OTHER_PROFILE,
+  FOLLOW_PROFILE,
 } from "./types";
 import axios from "axios";
 
@@ -34,6 +35,28 @@ export const getAllProfiles = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+  }
+};
+
+export const followProfile = (user) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ user });
+  try {
+    const res = await axios.post("/api/profile/followProfile", body, config);
+
+    dispatch({ type: GET_PROFILE, payload: res.data });
+  } catch (error) {
+    dispatch({
+      type: FOLLOW_PROFILE,
       payload: {
         msg: error.response.statusText,
         status: error.response.status,

@@ -4,6 +4,7 @@ import {
   PROFILE_ERROR,
   GET_PROFILES,
   GET_OTHER_PROFILE,
+  FOLLOW_PROFILE,
 } from "../actions/types";
 
 const initialState = {
@@ -30,6 +31,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profiles: payload,
+      };
+
+    case FOLLOW_PROFILE:
+      return {
+        ...state,
+        profile: payload,
       };
 
     case GET_OTHER_PROFILE:
