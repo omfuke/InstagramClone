@@ -53,26 +53,16 @@ router.post("/followProfile", auth, async (req, res) => {
   try {
     const otherProfile = req.body.user;
     const profile = await Profile.findOne({ user: req.user.id });
-    const newProf = profile;
-    console.log(newProf);
-    if (otherProfile == profile.following[0].user) {
-      console.log("yess");
-    }
 
-    newProf.following.forEach((element) => {
-      console.log(element);
-    });
-
-    if (arr) {
-      console.log("already exist");
-      return res.status(200).json({ msg: "already exist" });
+    if (profile.following.filter((p) => p.user == otherProfile).length > 0) {
+      return res.status(200).json(profile);
     }
 
     profile.following.unshift({ user: otherProfile });
 
     await profile.save();
 
-    res.status(200).json({ msg: "done" });
+    res.status(200).json(profile);
   } catch {
     res.status(500).send("Server Eroor");
   }

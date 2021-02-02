@@ -1,11 +1,22 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getOtherProfile, followProfile } from "../actions/profile";
+import {
+  getOtherProfile,
+  followProfile,
+  getCurrentProfile,
+} from "../actions/profile";
 
-const OtherProfile = ({ match, profile, getOtherProfile, followProfile }) => {
+const OtherProfile = ({
+  match,
+  profile,
+  getOtherProfile,
+  followProfile,
+  getCurrentProfile,
+}) => {
   useEffect(() => {
+    getCurrentProfile();
     getOtherProfile(match.params.name);
-  }, [getOtherProfile, match.params.name]);
+  }, [getOtherProfile, match.params.name, getCurrentProfile]);
 
   return (
     <div>
@@ -15,13 +26,19 @@ const OtherProfile = ({ match, profile, getOtherProfile, followProfile }) => {
           <p>{profile.otherProfile.bio}</p>
           <p>followers: {profile.otherProfile.followers.length}</p>
           <p>following: {profile.otherProfile.following.length}</p>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => followProfile(profile.otherProfile.user)}
-          >
-            Follow
-          </button>
+          {profile.profile.following.filter(
+            (p) => p.user === profile.otherProfile.user
+          ).length > 0 ? (
+            <button className="btn btn-primary">Following</button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => followProfile(profile.otherProfile.user)}
+            >
+              Follow
+            </button>
+          )}
         </div>
       ) : (
         <div className="spinner-border" role="status">
@@ -36,6 +53,8 @@ const mapStateToProps = (state) => {
   return { profile: state.profile };
 };
 
-export default connect(mapStateToProps, { getOtherProfile, followProfile })(
-  OtherProfile
-);
+export default connect(mapStateToProps, {
+  getOtherProfile,
+  followProfile,
+  getCurrentProfile,
+})(OtherProfile);

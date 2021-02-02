@@ -53,10 +53,10 @@ export const followProfile = (user) => async (dispatch) => {
   try {
     const res = await axios.post("/api/profile/followProfile", body, config);
 
-    dispatch({ type: GET_PROFILE, payload: res.data });
+    dispatch({ type: FOLLOW_PROFILE, payload: res.data });
   } catch (error) {
     dispatch({
-      type: FOLLOW_PROFILE,
+      type: PROFILE_ERROR,
       payload: {
         msg: error.response.statusText,
         status: error.response.status,
