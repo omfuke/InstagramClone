@@ -6,6 +6,7 @@ import { Redirect, Link } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profile";
 import Navbar from "../../layout/Navbar";
 import Spinner from "../../Spinner/Spinner";
+import "./Dashboard.css";
 
 const Dashboard = ({
   logout,
@@ -36,6 +37,20 @@ const Dashboard = ({
     <Fragment>
       <Navbar />
       <div className="posts">
+        <div className="post">
+          <div className="postItem">
+            <i class="fas fa-plus-square fa-2x"></i>
+          </div>
+          <div className="postItem1">Posts for you</div>
+          <div className="postItem">
+            <i className="fas fa-camera fa-4x"></i>
+          </div>
+          <div className="postItem">
+            <div>No Posts Yet</div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="posts">
         <h1 onClick={logOutHandler}>Logout</h1>
         {loading ? (
           <img src={spinner} width="100" height="100" alt="om" />
@@ -55,7 +70,7 @@ const Dashboard = ({
             Edit Profile
           </Link>
         )}
-      </div>
+      </div> */}
     </Fragment>
   );
 };

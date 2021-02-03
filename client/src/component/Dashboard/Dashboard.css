@@ -1,0 +1,23 @@
+.posts {
+  background-color: #fafafa;
+  height: 100vh;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  margin: auto;
+  padding-top: 1em;
+}
+.postItem {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-bottom: 2em;
+}
+.postItem1 {
+  text-align: center;
+  margin-bottom: 7em;
+  border-bottom: 1px solid #e8e8e8;
+}

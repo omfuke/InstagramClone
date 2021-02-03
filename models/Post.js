@@ -5,6 +5,10 @@ const userPost = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  caption: {
+    type: String,
+  },
+
   image: {
     type: String,
     required: true,

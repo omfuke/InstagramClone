@@ -1,4 +1,36 @@
 .navlink {
-  margin: 5px;
-  padding: 5px;
+  margin-right: 2em;
+  flex-basis: 20%;
+}
+
+.navhead p {
+  font-family: myFirstFont;
+  font-size: 2em;
+  margin: auto;
+  color: black;
+}
+.navlinks {
+  padding-right: 2em;
+}
+
+.nav {
+  border-bottom: 1px solid #e8e8e8;
+}
+.navbar {
+  width: 75vw;
+  padding: 2em;
+  margin: auto;
+  display: flex;
+
+  /* display: flex;
+  
+
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  box-sizing: border-box;
+  top: 0;
+  height: 54px;
+  width: 100vw;
+  border-bottom: 1px solid #e8e8e8; */
 }
