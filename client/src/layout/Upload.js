@@ -3,9 +3,11 @@ import "./upload.css";
 import { useCallback } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "./cropImage";
+import axios from "axios";
 
 const Upload = ({ closeEvent, dpHandler }) => {
   const [file, setFile] = useState(null);
+  const [fileData, setFileData] = useState(null);
   const [image, setImage] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -27,6 +29,16 @@ const Upload = ({ closeEvent, dpHandler }) => {
       console.log("donee", { croppedImage });
       setCroppedImage(croppedImage);
       dpHandler(croppedImage);
+
+      const formData = new FormData();
+      formData.append("file", fileData);
+      // const config = {
+      //   headers: {
+      //     "content-type": "multipart/form-data",
+      //   },
+      // };
+      const res = await axios.post("/api/profile", formData);
+
       closeEvent();
     } catch (e) {
       console.error(e);
@@ -35,6 +47,7 @@ const Upload = ({ closeEvent, dpHandler }) => {
 
   const onChangeHandler = (e) => {
     const selected = e.target.files[0];
+    setFileData(e.target.files[0]);
     let reader = new FileReader();
 
     reader.onloadend = () => {

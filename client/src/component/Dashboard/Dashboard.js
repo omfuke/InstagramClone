@@ -28,9 +28,9 @@ const Dashboard = ({
     return <Redirect to="/" />;
   }
 
-  if (loading) {
-    return <Spinner />;
-  }
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <Fragment>

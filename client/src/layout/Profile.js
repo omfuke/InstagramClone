@@ -48,9 +48,9 @@ const Profile = ({ profile, getCurrentProfile, post }) => {
           </div>
 
           <h2>Posts:</h2>
-
+          {/* 
           <div>{post.text}</div>
-          <p>likes: {post.likes.length}</p>
+          <p>likes: {post.likes.length}</p> */}
         </div>
       )}
       {image && <Upload dpHandler={dpHandler} closeEvent={closeEvent} />}

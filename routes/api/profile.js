@@ -78,33 +78,22 @@ router.get("/:name", auth, async (req, res) => {
   }
 });
 
-router.post("/", [auth, upload.single("profileImage")], async (req, res) => {
-  const { name, bio } = req.body;
-  const profileImage = req.file;
+router.post("/", [auth, upload.single("file")], async (req, res) => {
+  // const { name, bio } = req.body;
+  // const profileImage = req.file;
   console.log(req.file);
 
   const userProfile = {};
   userProfile.user = req.user.id;
-  if (name) userProfile.name = name;
-  if (bio) userProfile.bio = bio;
-  if (profileImage) userProfile.profileImage = req.file.path;
 
   try {
     let profile = await Profile.findOne({ user: req.user.id });
-    if (profile) {
-      profile = await Profile.findOneAndUpdate(
-        { user: req.user.id },
-        userProfile,
-        { new: true }
-      );
-      return res.status(200).json({ msg: "user updated" });
-    }
-    profile = new Profile(userProfile);
+    profile.profileImage = req.file.path;
     await profile.save();
 
-    res.status(200).send(profile);
+    return res.status(200).json({ msg: "user updated" });
   } catch {
-    res.status(500).json({ msg: "server error" });
+    res.status(200).json({ msg: "server error" });
   }
 });
 
