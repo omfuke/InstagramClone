@@ -1,6 +1,29 @@
 .profile {
+  display: flex;
+  flex-direction: row;
+  height: 25vh;
+  border: 1px solid black;
+  margin-top: 5em;
+}
+.profileImg div {
+  margin: auto;
+  border-radius: 50%;
+  width: 9em;
+  height: 9em;
+  border: 1px solid black;
 }
 
+.profileImg {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  flex: 1 1 0;
+}
+
+.profileDetail {
+  border: 1px solid black;
+  flex: 2 1 0;
+}
 .profile-img {
   border-radius: 50%;
   width: 100px;

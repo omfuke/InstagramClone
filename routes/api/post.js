@@ -27,7 +27,7 @@ const upload = multer({ storage: storage, fileFilter: fileFlter });
 
 router.get("/", auth, async (req, res) => {
   const profile = await Profile.findOne({ user: req.user.id });
-  const post = await Post.findOne({ user: profile.user });
+  const post = await Post.findOne({ user: req.user.id });
 
   return res.json(post);
 });

@@ -36,9 +36,10 @@ const Dashboard = ({
     setFile(e.target.files[0]);
   };
 
-  // if (loading) {
-  //   return <Spinner />;
-  // }
+  if (loading) {
+    return <Spinner />;
+  }
+
   const postHandler = async () => {
     const formData = new FormData();
     formData.append("file", file);

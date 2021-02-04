@@ -20,8 +20,7 @@ export const getCurrentProfile = () => async (dispatch) => {
     dispatch({
       type: PROFILE_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: "server error",
       },
     });
   }
@@ -36,8 +35,7 @@ export const getAllProfiles = () => async (dispatch) => {
     dispatch({
       type: PROFILE_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: "server error",
       },
     });
   }
@@ -58,8 +56,7 @@ export const followProfile = (user) => async (dispatch) => {
     dispatch({
       type: PROFILE_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: "server error",
       },
     });
   }
@@ -73,8 +70,7 @@ export const getOtherProfile = (name) => async (dispatch) => {
     dispatch({
       type: PROFILE_ERROR,
       payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
+        msg: "server error",
       },
     });
   }

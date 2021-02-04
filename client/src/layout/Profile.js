@@ -24,6 +24,13 @@ const Profile = ({ profile, getCurrentProfile, post }) => {
   return (
     <>
       <Navbar />
+
+      <div className="profile">
+        <div className="profileImg">
+          <div></div>
+        </div>
+        <div className="profileDetail"></div>
+      </div>
       {profile && (
         <div>
           <div>

@@ -81,6 +81,7 @@ router.get("/:name", auth, async (req, res) => {
 router.post("/", [auth, upload.single("file")], async (req, res) => {
   // const { name, bio } = req.body;
   // const profileImage = req.file;
+
   console.log(req.file);
 
   const userProfile = {};
