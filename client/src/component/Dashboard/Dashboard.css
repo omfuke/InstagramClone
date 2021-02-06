@@ -1,6 +1,6 @@
 .posts {
   background-color: #fafafa;
-  height: 100vh;
+  height: 100%;
   padding-top: 5em;
 }
 
@@ -19,7 +19,7 @@
 }
 .postItem1 {
   text-align: center;
-  margin-bottom: 7em;
+  margin-bottom: 4em;
   border-bottom: 1px solid #e8e8e8;
 }
 

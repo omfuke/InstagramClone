@@ -9,6 +9,7 @@ import Spinner from "../../Spinner/Spinner";
 import "./Dashboard.css";
 import axios from "axios";
 import { getPosts } from "../../actions/post";
+import Post from "../Post/Post";
 
 const Dashboard = ({
   logout,
@@ -18,9 +19,15 @@ const Dashboard = ({
   getCurrentProfile,
   profile,
   getPosts,
+  posts,
 }) => {
   const [post, setPost] = useState(false);
   const [file, setFile] = useState(null);
+
+  if (posts) {
+    const images = posts.filter((p) => p.length > 0);
+    console.log(images);
+  }
 
   const logOutHandler = () => {
     logout();
@@ -64,7 +71,7 @@ const Dashboard = ({
               onClick={() => setPost(!post)}
             ></i>
           </div>
-          {!post && (
+          {!posts ? (
             <div>
               <div className="postItem1">Posts for you</div>
               <div className="postItem">
@@ -73,6 +80,14 @@ const Dashboard = ({
               <div className="postItem">
                 <div>No Posts Yet</div>
               </div>
+            </div>
+          ) : (
+            <div>
+              <div className="postItem1">Posts for you</div>
+
+              {posts.map((p) => (
+                <Post detail={p} />
+              ))}
             </div>
           )}
         </div>
@@ -137,7 +152,7 @@ const mapStateToProps = (state) => {
     isAuthencticated: state.auth.isAuthencticated,
     loading: state.profile.loading,
     profile: state.profile.profile,
-    posts: state.post,
+    posts: state.post.posts,
   };
 };
 

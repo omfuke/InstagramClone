@@ -1,0 +1,20 @@
+.postCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e8e8e8;
+  margin: auto;
+  width: 40vw;
+  margin-bottom: 4em;
+}
+
+.postCard1 {
+  height: 3em;
+}
+
+.postCard2 {
+  height: 30em;
+}
+
+.postCard3 {
+  height: 3em;
+}
