@@ -8,6 +8,7 @@ import Navbar from "../../layout/Navbar";
 import Spinner from "../../Spinner/Spinner";
 import "./Dashboard.css";
 import axios from "axios";
+import { getPosts } from "../../actions/post";
 
 const Dashboard = ({
   logout,
@@ -16,9 +17,11 @@ const Dashboard = ({
   loading,
   getCurrentProfile,
   profile,
+  getPosts,
 }) => {
   const [post, setPost] = useState(false);
   const [file, setFile] = useState(null);
+
   const logOutHandler = () => {
     logout();
     clearProfile();
@@ -26,7 +29,9 @@ const Dashboard = ({
 
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+
+    getPosts();
+  }, [getCurrentProfile, getPosts]);
 
   if (!isAuthencticated) {
     return <Redirect to="/" />;
@@ -59,13 +64,17 @@ const Dashboard = ({
               onClick={() => setPost(!post)}
             ></i>
           </div>
-          <div className="postItem1">Posts for you</div>
-          <div className="postItem">
-            <i className="fas fa-camera fa-4x"></i>
-          </div>
-          <div className="postItem">
-            <div>No Posts Yet</div>
-          </div>
+          {!post && (
+            <div>
+              <div className="postItem1">Posts for you</div>
+              <div className="postItem">
+                <i className="fas fa-camera fa-4x"></i>
+              </div>
+              <div className="postItem">
+                <div>No Posts Yet</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {post && (
@@ -128,6 +137,7 @@ const mapStateToProps = (state) => {
     isAuthencticated: state.auth.isAuthencticated,
     loading: state.profile.loading,
     profile: state.profile.profile,
+    posts: state.post,
   };
 };
 
@@ -135,4 +145,5 @@ export default connect(mapStateToProps, {
   logout,
   clearProfile,
   getCurrentProfile,
+  getPosts,
 })(Dashboard);

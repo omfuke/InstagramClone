@@ -86,8 +86,8 @@ export const createProfile = (formData, history, edit = false) => async (
   };
 
   try {
-    const res = await axios.post("/api/profile", formData, config);
-    dispatch({ type: GET_PROFILE, payload: res });
+    const res = await axios.post("/api/profile/makeProfile", formData, config);
+    dispatch({ type: GET_PROFILE, payload: res.data });
     history.push("/dashboard");
   } catch (err) {
     console.log(err);

@@ -26,7 +26,7 @@ const OtherProfile = ({
           <p>{profile.otherProfile.bio}</p>
           <p>followers: {profile.otherProfile.followers.length}</p>
           <p>following: {profile.otherProfile.following.length}</p>
-          {profile.profile.following.filter(
+          {profile.profile.profile.following.filter(
             (p) => p.user === profile.otherProfile.user
           ).length > 0 ? (
             <button className="btn btn-primary">Following</button>

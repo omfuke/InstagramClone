@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   profile: null,
-  posts: null,
+
   profiles: [],
   loading: true,
   otherProfile: null,
@@ -23,9 +23,8 @@ export default function (state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: payload.profile,
+        profile: payload,
         loading: false,
-        posts: payload.post,
       };
     case GET_PROFILES:
       return {
