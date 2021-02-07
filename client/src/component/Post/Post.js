@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
 import axios from "axios";
+import { getPosts } from "../../actions/post";
+import { connect } from "react-redux";
 
-const Post = ({ detail }) => {
-  console.log(detail);
+const Post = ({ detail, getPosts, user }) => {
   const url = detail.image.split("\\")[1];
-  console.log(url);
+
   const [like, setLike] = useState(false);
 
   const likeHandler = async (postId) => {
-    console.log(postId);
-
     const res = await axios.get(`api/post/like/${postId}`);
-    setLike(res.data.like);
-    console.log(res);
+    getPosts();
   };
 
   return (
     <div className="postCard">
       <div className="postCard1">
-        <p>{detail.user}</p>
+        <p>{detail._id}</p>
       </div>
       <div
         className="postCard2"
@@ -34,11 +32,17 @@ const Post = ({ detail }) => {
           onClick={() => likeHandler(detail._id)}
           style={{ color: like ? "blue" : "red" }}
         >
-          Like
+          Likes {detail.likes.length}
         </div>
       </div>
     </div>
   );
 };
 
-export default Post;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps, { getPosts })(Post);

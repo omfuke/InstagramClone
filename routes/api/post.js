@@ -69,6 +69,11 @@ router.get("/like/:postId", auth, async (req, res) => {
   const post = await Post.findById(req.params.postId);
   console.log(post);
   if (post.likes.filter((p) => p.user.toString() === req.user.id).length > 0) {
+    const removeIndex = post.likes
+      .map((p) => p.user.toString())
+      .indexOf(req.user.id);
+    post.likes.splice(removeIndex, 1);
+    await post.save();
     return res.json({ like: true });
   }
 
