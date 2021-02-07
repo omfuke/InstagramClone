@@ -60,9 +60,22 @@ router.get("/posts", auth, async (req, res) => {
     }
     continue;
   }
-  console.log(images);
 
   return res.json(images);
+});
+
+router.get("/like/:postId", auth, async (req, res) => {
+  console.log("likee");
+  const post = await Post.findById(req.params.postId);
+  console.log(post);
+  if (post.likes.filter((p) => p.user.toString() === req.user.id).length > 0) {
+    return res.json({ like: true });
+  }
+
+  post.likes.unshift({ user: req.user.id });
+  await post.save();
+  console.log(post);
+  return res.json({ like: true });
 });
 
 module.exports = router;

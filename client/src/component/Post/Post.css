@@ -4,6 +4,7 @@
   border: 1px solid #e8e8e8;
   margin: auto;
   width: 40vw;
+
   margin-bottom: 4em;
 }
 
@@ -17,4 +18,5 @@
 
 .postCard3 {
   height: 3em;
+  align-self: center;
 }
