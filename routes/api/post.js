@@ -55,6 +55,7 @@ router.get("/posts", auth, async (req, res) => {
   for (let index = 0; index < profile.following.length; index++) {
     const element = profile.following[index];
     const otherProfile = await Post.find({ user: element.user });
+
     if (otherProfile) {
       images = [...images, ...otherProfile];
     }
@@ -67,20 +68,20 @@ router.get("/posts", auth, async (req, res) => {
 router.get("/like/:postId", auth, async (req, res) => {
   console.log("likee");
   const post = await Post.findById(req.params.postId);
-  console.log(post);
+
   if (post.likes.filter((p) => p.user.toString() === req.user.id).length > 0) {
     const removeIndex = post.likes
       .map((p) => p.user.toString())
       .indexOf(req.user.id);
     post.likes.splice(removeIndex, 1);
     await post.save();
-    return res.json({ like: true });
+    return res.json(post.likes);
   }
 
   post.likes.unshift({ user: req.user.id });
   await post.save();
-  console.log(post);
-  return res.json({ like: true });
+
+  return res.json(post.likes);
 });
 
 module.exports = router;

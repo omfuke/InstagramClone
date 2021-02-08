@@ -12,3 +12,4 @@ export const GET_PROFILES = "GET_PROFILES";
 export const GET_OTHER_PROFILE = "GET_OTHER_PROFILE";
 export const FOLLOW_PROFILE = "FOLLOW_PROFILE";
 export const GET_POSTS = "GET_POSTS";
+export const UPDATE_LIKES = "UPDATE_LIKES";
