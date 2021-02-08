@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
-import axios from "axios";
+
 import { updateLikes } from "../../actions/post";
 import { connect } from "react-redux";
 
 const Post = ({ detail, updateLikes, user, post }) => {
   const url = detail.image.split("\\")[1];
 
-  const [like, setLike] = useState(false);
+  const like =
+    detail.likes.filter((l) => l.user === user._id).length > 0 ? true : false;
 
   return (
     <div className="postCard">
@@ -25,7 +26,9 @@ const Post = ({ detail, updateLikes, user, post }) => {
       <div className="postCard3">
         <div
           onClick={() => updateLikes(detail._id, user._id)}
-          style={{ color: like ? "blue" : "red" }}
+          style={{
+            color: like ? "blue" : "red",
+          }}
         >
           Likes {detail.likes.length}
         </div>
