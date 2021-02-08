@@ -5,15 +5,16 @@ import {
   GET_PROFILES,
   GET_OTHER_PROFILE,
   FOLLOW_PROFILE,
+  UNFOLLOW_PROFILE,
 } from "../actions/types";
 
 const initialState = {
   profile: null,
-
   profiles: [],
   loading: true,
   otherProfile: null,
   errors: {},
+  userFF: null,
 };
 
 export default function (state = initialState, action) {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
         ...state,
         profile: payload,
         loading: false,
+        userFF: payload.profile,
       };
     case GET_PROFILES:
       return {
@@ -35,7 +37,14 @@ export default function (state = initialState, action) {
     case FOLLOW_PROFILE:
       return {
         ...state,
-        profile: payload,
+        userFF: payload.profile,
+        otherProfile: payload.oProfile,
+      };
+    case UNFOLLOW_PROFILE:
+      return {
+        ...state,
+        userFF: payload.profile,
+        otherProfile: payload.oProfile,
       };
 
     case GET_OTHER_PROFILE:

@@ -4,6 +4,7 @@ import {
   getOtherProfile,
   followProfile,
   getCurrentProfile,
+  unfollowProfile,
 } from "../actions/profile";
 
 const OtherProfile = ({
@@ -12,7 +13,11 @@ const OtherProfile = ({
   getOtherProfile,
   followProfile,
   getCurrentProfile,
+  unfollowProfile,
+  user,
 }) => {
+  console.log(profile.profile);
+
   useEffect(() => {
     getCurrentProfile();
     getOtherProfile(match.params.name);
@@ -21,15 +26,22 @@ const OtherProfile = ({
   return (
     <div>
       <h3>{match.params.name}</h3>
-      {profile.otherProfile ? (
+
+      {profile.otherProfile && profile.userFF ? (
         <div>
           <p>{profile.otherProfile.bio}</p>
           <p>followers: {profile.otherProfile.followers.length}</p>
           <p>following: {profile.otherProfile.following.length}</p>
-          {profile.profile.profile.following.filter(
-            (p) => p.user === profile.otherProfile.user
-          ).length > 0 ? (
-            <button className="btn btn-primary">Following</button>
+
+          {profile.otherProfile.followers &&
+          profile.otherProfile.followers.filter((p) => p.user === user._id)
+            .length > 0 ? (
+            <button
+              className="btn btn-primary"
+              onClick={() => unfollowProfile(profile.otherProfile.user)}
+            >
+              Unfollow
+            </button>
           ) : (
             <button
               type="button"
@@ -39,6 +51,24 @@ const OtherProfile = ({
               Follow
             </button>
           )}
+
+          {/* {profile.otherProfile.followers.filter((p) => p.user === user._id)
+            .length > 0 ? (
+            <button
+              className="btn btn-primary"
+              onClick={() => unfollowProfile(profile.otherProfile.user)}
+            >
+              Unfollow
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => followProfile(profile.otherProfile.user)}
+            >
+              Follow
+            </button>
+          )} */}
         </div>
       ) : (
         <div className="spinner-border" role="status">
@@ -50,11 +80,12 @@ const OtherProfile = ({
 };
 
 const mapStateToProps = (state) => {
-  return { profile: state.profile };
+  return { profile: state.profile, user: state.auth.user };
 };
 
 export default connect(mapStateToProps, {
   getOtherProfile,
   followProfile,
   getCurrentProfile,
+  unfollowProfile,
 })(OtherProfile);

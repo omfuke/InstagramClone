@@ -15,21 +15,24 @@ const Profile = ({
   isAuthencticated,
   post,
 }) => {
-  const [image, setImage] = useState(false);
-  const [dp, setDp] = useState(null);
-  const [p, setP] = useState([]);
+  // const [image, setImage] = useState(false);
+  // const [dp, setDp] = useState(null);
+  // const [p, setP] = useState([]);
 
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+  if (profile) {
+    console.log(profile.post);
+  }
 
-  const closeEvent = () => {
-    setImage(!image);
-  };
+  // const closeEvent = () => {
+  //   setImage(!image);
+  // };
 
-  const dpHandler = (url) => {
-    setDp(url);
-  };
+  // const dpHandler = (url) => {
+  //   setDp(url);
+  // };
   if (!isAuthencticated) {
     return <Redirect to="/" />;
   }
@@ -64,8 +67,14 @@ const Profile = ({
           </div>
         </div>
       </div>
+
       <div className="profilePosts">
-        <div></div>
+        {profile.post.map((p) => (
+          <div
+            className="userProfile"
+            style={{ background: `url('/${p.image.split("\\")[1]}')` }}
+          ></div>
+        ))}
       </div>
     </>
   );

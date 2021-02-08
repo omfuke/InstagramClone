@@ -4,6 +4,7 @@ import {
   GET_PROFILES,
   GET_OTHER_PROFILE,
   FOLLOW_PROFILE,
+  UNFOLLOW_PROFILE,
 } from "./types";
 import axios from "axios";
 
@@ -50,8 +51,30 @@ export const followProfile = (user) => async (dispatch) => {
   const body = JSON.stringify({ user });
   try {
     const res = await axios.post("/api/profile/followProfile", body, config);
+    console.log(res.data);
 
     dispatch({ type: FOLLOW_PROFILE, payload: res.data });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: "server error",
+      },
+    });
+  }
+};
+
+export const unfollowProfile = (user) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ user });
+  try {
+    const res = await axios.post("/api/profile/unfollowProfile", body, config);
+
+    dispatch({ type: UNFOLLOW_PROFILE, payload: res.data });
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,

@@ -53,16 +53,51 @@ router.post("/followProfile", auth, async (req, res) => {
   try {
     const otherProfile = req.body.user;
     const profile = await Profile.findOne({ user: req.user.id });
+    const oProfile = await Profile.findOne({ user: otherProfile });
 
-    if (profile.following.filter((p) => p.user == otherProfile).length > 0) {
-      return res.status(200).json(profile);
-    }
+    oProfile.followers.unshift({ user: req.user.id });
+
+    // if (profile.following.filter((p) => p.user == otherProfile).length > 0) {
+    //   return res.status(200).json(profile);
+    // }
 
     profile.following.unshift({ user: otherProfile });
 
     await profile.save();
+    await oProfile.save();
 
-    res.status(200).json(profile);
+    res.status(200).json({ profile, oProfile });
+  } catch {
+    res.status(500).send("Server Eroor");
+  }
+});
+
+router.post("/unfollowProfile", auth, async (req, res) => {
+  try {
+    const otherProfile = req.body.user;
+    const profile = await Profile.findOne({ user: req.user.id });
+    const oProfile = await Profile.findOne({ user: otherProfile });
+
+    // if (profile.following.filter((p) => p.user == otherProfile).length > 0) {
+    //   return res.status(200).json(profile);
+    // }
+
+    const index = oProfile.followers
+      .map((p) => p.user.toString())
+      .indexOf(req.user.id);
+    oProfile.followers.splice(index, 1);
+
+    const removeIndex = profile.following
+      .map((p) => p.user.toString())
+      .indexOf(otherProfile);
+    profile.following.splice(removeIndex, 1);
+
+    console.log(oProfile);
+
+    await profile.save();
+    await oProfile.save();
+
+    res.status(200).json({ profile, oProfile });
   } catch {
     res.status(500).send("Server Eroor");
   }

@@ -49,8 +49,8 @@
   justify-content: center;
   margin: 1em;
 }
-.profilePosts div {
-  background: url("/2021-02-03T02-36-27.230Zom2.jpeg");
+.userProfile {
+  /* background: url("/2021-02-03T02-36-27.230Zom2.jpeg"); */
   background-size: contain;
   background-repeat: no-repeat;
   width: 30vw;

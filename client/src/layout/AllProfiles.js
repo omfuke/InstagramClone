@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import NavBar from "./Navbar";
 import { connect } from "react-redux";
-import { getAllProfiles } from "../actions/profile";
+import { getAllProfiles, getCurrentProfile } from "../actions/profile";
 import OtherUsers from "../OtherUsers/OtherUsers";
 
-const AllProfiles = ({ profile, isAuthencticated, getAllProfiles }) => {
+const AllProfiles = ({
+  profile,
+  isAuthencticated,
+  getCurrentProfile,
+  getAllProfiles,
+}) => {
   useEffect(() => {
+    getCurrentProfile();
     getAllProfiles();
-  }, [getAllProfiles]);
+  }, [getAllProfiles, getCurrentProfile]);
 
   return (
     <div>
@@ -34,4 +40,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getAllProfiles })(AllProfiles);
+export default connect(mapStateToProps, { getAllProfiles, getCurrentProfile })(
+  AllProfiles
+);

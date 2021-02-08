@@ -27,7 +27,7 @@ const upload = multer({ storage: storage, fileFilter: fileFlter });
 
 router.get("/", auth, async (req, res) => {
   // const profile = await Profile.findOne({ user: req.user.id });
-  const post = await Post.findOne({ user: req.user.id });
+  const post = await Post.find({ user: req.user.id });
 
   return res.json(post);
 });
@@ -66,7 +66,6 @@ router.get("/posts", auth, async (req, res) => {
 });
 
 router.get("/like/:postId", auth, async (req, res) => {
-  console.log("likee");
   const post = await Post.findById(req.params.postId);
 
   if (post.likes.filter((p) => p.user.toString() === req.user.id).length > 0) {
