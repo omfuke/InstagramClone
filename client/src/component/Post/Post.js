@@ -18,7 +18,7 @@ const Post = ({ detail, updateLikes, user, post }) => {
       <div
         className="postCard2"
         style={{
-          background: `url(/${url})`,
+          background: `url(/${url}) no-repeat center/cover`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
         }}
