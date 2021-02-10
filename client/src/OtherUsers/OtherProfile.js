@@ -6,6 +6,9 @@ import {
   getCurrentProfile,
   unfollowProfile,
 } from "../actions/profile";
+import NavBar from "../layout/Navbar";
+import Spinner from "../Spinner/Spinner";
+import "./OtherProfile.css";
 
 const OtherProfile = ({
   match,
@@ -25,55 +28,54 @@ const OtherProfile = ({
 
   return (
     <div>
-      <h3>{match.params.name}</h3>
+      <NavBar />
 
       {profile.otherProfile && profile.userFF ? (
         <div>
-          <p>{profile.otherProfile.bio}</p>
-          <p>followers: {profile.otherProfile.followers.length}</p>
-          <p>following: {profile.otherProfile.following.length}</p>
-
-          {profile.otherProfile.followers &&
-          profile.otherProfile.followers.filter((p) => p.user === user._id)
-            .length > 0 ? (
-            <button
-              className="btn btn-primary"
-              onClick={() => unfollowProfile(profile.otherProfile.user)}
-            >
-              Unfollow
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => followProfile(profile.otherProfile.user)}
-            >
-              Follow
-            </button>
-          )}
-
-          {/* {profile.otherProfile.followers.filter((p) => p.user === user._id)
-            .length > 0 ? (
-            <button
-              className="btn btn-primary"
-              onClick={() => unfollowProfile(profile.otherProfile.user)}
-            >
-              Unfollow
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => followProfile(profile.otherProfile.user)}
-            >
-              Follow
-            </button>
-          )} */}
+          <div className="OtherProfile">
+            <div className="header1">
+              <div className="oProfile1">
+                <div></div>
+              </div>
+              <div className="oProfile2">
+                <div className="oProfile2D">
+                  <span>{match.params.name}</span>
+                  {profile.otherProfile.followers &&
+                  profile.otherProfile.followers.filter(
+                    (p) => p.user === user._id
+                  ).length > 0 ? (
+                    <div
+                      className="follow"
+                      onClick={() => unfollowProfile(profile.otherProfile.user)}
+                    >
+                      Unfollow
+                    </div>
+                  ) : (
+                    <div
+                      type="button"
+                      className="follow"
+                      onClick={() => followProfile(profile.otherProfile.user)}
+                    >
+                      Follow
+                    </div>
+                  )}
+                </div>
+                <div>
+                  posts 0 followers: {profile.otherProfile.followers.length}{" "}
+                  following: {profile.otherProfile.following.length}
+                </div>
+              </div>
+            </div>
+            <div className="header2">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
+        <Spinner />
       )}
     </div>
   );
