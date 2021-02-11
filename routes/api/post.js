@@ -65,6 +65,12 @@ router.get("/posts", auth, async (req, res) => {
   return res.json(images);
 });
 
+router.post("/user", auth, async (req, res) => {
+  const profile = await Profile.findOne({ user: req.body.user });
+
+  res.json(profile);
+});
+
 router.get("/like/:postId", auth, async (req, res) => {
   const post = await Post.findById(req.params.postId);
 
