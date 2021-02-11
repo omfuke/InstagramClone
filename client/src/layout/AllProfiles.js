@@ -20,9 +20,18 @@ const AllProfiles = ({
       {profile.profiles ? (
         <div>
           <NavBar />
-          {profile.profiles.map((p) => (
-            <OtherUsers key={p._id} name={p.name} />
-          ))}
+          <div
+            style={{
+              marginTop: "6em",
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: "30%",
+            }}
+          >
+            {profile.profiles.map((p) => (
+              <OtherUsers key={p._id} name={p.name} url={p.profileImage} />
+            ))}
+          </div>
         </div>
       ) : (
         <div class="spinner-border" role="status">

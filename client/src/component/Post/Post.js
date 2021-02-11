@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 const Post = ({ detail, updateLikes, user, post }) => {
   const url = detail.image.split("\\")[1];
   const [User, setUser] = useState(null);
+  const [userImg, setUserImg] = useState(null);
 
   const like =
     detail.likes.filter((l) => l.user === user._id).length > 0 ? true : false;
@@ -23,14 +24,26 @@ const Post = ({ detail, updateLikes, user, post }) => {
     const res = await axios.post("api/post/user", body, config);
 
     setUser(res.data.name);
+    setUserImg(res.data.profileImage);
   }, []);
 
   return (
     <div className="postCard">
       <div className="postCard1">
-        <div>
-          <img />
-        </div>
+        {userImg && (
+          <div>
+            <img
+              src={`/${userImg.split("\\")[1]}`}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
+          </div>
+        )}
+
         {User && (
           <Link to={`/profile/${User}`}>
             <p>{User}</p>
@@ -45,7 +58,7 @@ const Post = ({ detail, updateLikes, user, post }) => {
 
             width: "100%",
             height: "100%",
-            objectFit: "cover",
+            objectFit: "contain",
           }}
         />
       </div>

@@ -35,7 +35,17 @@ const OtherProfile = ({
           <div className="OtherProfile">
             <div className="header1">
               <div className="oProfile1">
-                <div></div>
+                <div>
+                  <img
+                    src={`/${profile.otherProfile.profileImage.split("\\")[1]}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </div>
               </div>
               <div className="oProfile2">
                 <div className="oProfile2D">
@@ -66,12 +76,23 @@ const OtherProfile = ({
                 </div>
               </div>
             </div>
-            <div className="header2">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
+            {profile.otherProfilePosts && (
+              <div className="header2">
+                {profile.otherProfilePosts.map((p) => (
+                  <div>
+                    <img
+                      style={{
+                        height: "100%",
+                        width: "100%",
+
+                        objectFit: "cover",
+                      }}
+                      src={`/${p.image.split("\\")[1]}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       ) : (

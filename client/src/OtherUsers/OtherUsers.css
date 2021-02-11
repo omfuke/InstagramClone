@@ -1,0 +1,17 @@
+.UsersCard {
+  margin-bottom: 1em;
+  border: 1px solid #e8e8e8;
+  width: 33vw;
+  padding: 1em;
+  display: flex;
+}
+
+.UserCardImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2em;
+  height: 2em;
+  border: 1px solid #e8e8e8;
+  border-radius: 50%;
+}

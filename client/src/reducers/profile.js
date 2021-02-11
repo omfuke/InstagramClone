@@ -13,6 +13,7 @@ const initialState = {
   profiles: [],
   loading: true,
   otherProfile: null,
+  otherProfilePosts: null,
   errors: {},
   userFF: null,
 };
@@ -48,7 +49,11 @@ export default function (state = initialState, action) {
       };
 
     case GET_OTHER_PROFILE:
-      return { ...state, otherProfile: payload };
+      return {
+        ...state,
+        otherProfile: payload.userProfile,
+        otherProfilePosts: payload.userProfilePosts,
+      };
 
     case PROFILE_ERROR:
       return { ...state, errors: payload, loading: true };

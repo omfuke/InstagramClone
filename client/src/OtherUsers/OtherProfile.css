@@ -63,4 +63,5 @@
   flex: 0 1 30%;
   margin: 0.5em;
   border: 1px solid black;
+  position: relative;
 }

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
+const Post = require("../../models/Post");
 const auth = require("../../middleware/auth");
 
 const multer = require("multer");
@@ -141,7 +142,10 @@ router.get("/:name", auth, async (req, res) => {
   const name = req.params.name;
   try {
     const userProfile = await Profile.findOne({ name: name });
-    return res.json(userProfile);
+    const userProfilePosts = await Post.find({ user: userProfile.user });
+    console.log(userProfilePosts);
+
+    return res.json({ userProfile, userProfilePosts });
   } catch {
     res.status(500).json({ msg: "server error" });
   }
