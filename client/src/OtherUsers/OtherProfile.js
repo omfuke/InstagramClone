@@ -81,12 +81,7 @@ const OtherProfile = ({
                 {profile.otherProfilePosts.map((p) => (
                   <div>
                     <img
-                      style={{
-                        height: "100%",
-                        width: "100%",
-
-                        objectFit: "cover",
-                      }}
+                      className="OProfileImg"
                       src={`/${p.image.split("\\")[1]}`}
                     />
                   </div>

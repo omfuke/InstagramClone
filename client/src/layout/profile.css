@@ -1,19 +1,31 @@
 .profileHeader {
+  height: 33vh;
+  margin-top: 5em;
+
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #e8e8e8;
+}
+.OtherProfile {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  height: 100%;
+
+  margin: 0 auto;
 }
 .profile {
-  flex-basis: 75%;
+  flex-grow: 1;
   display: flex;
-  flex-direction: row;
-  height: 25vh;
-  padding: 1.5em auto;
-  margin-top: 5em;
   justify-content: center;
-
-  border-bottom: 1px solid #e8e8e8;
-  margin-bottom: 2em;
+  align-items: center;
+}
+.profile div {
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 50%;
 }
 
 .prof {
@@ -49,9 +61,10 @@
 }
 
 .profileDetail {
-  flex: 2 1 0;
-  display: flex;
-  flex-direction: column;
+  padding-top: 2em;
+  padding-left: 1em;
+
+  flex-grow: 2;
 }
 
 .profileDetail div {
@@ -59,13 +72,18 @@
 }
 
 .profilePosts {
-  height: 45vh;
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  margin: 1em;
+  flex-flow: row wrap;
+}
+
+.profilePosts div {
+  height: 33vh;
+  flex: 0 1 30%;
+  margin: 0.5em;
+  border: 1px solid #e8e8e8;
+  position: relative;
+  background-size: cover;
+  background-position: center center;
 }
 .userProfile {
   /* background: url("/2021-02-03T02-36-27.230Zom2.jpeg"); */

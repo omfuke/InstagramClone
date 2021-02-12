@@ -70,23 +70,28 @@ const Profile = ({
   return (
     <>
       <Navbar />
-      <div className="profileHeader">
-        <div className="profile">
-          {profile.profile.profileImage ? (
-            <div
-              className="prof"
-              onClick={() => setImage(!image)}
-              style={{
-                background: `url('/${
-                  profile.profile.profileImage.split("\\")[1]
-                }') no-repeat center/cover`,
-              }}
-            ></div>
-          ) : (
-            <div onClick={() => setImage(!image)}>
-              <i className="fas fa-user-alt fa-4x"></i>
-            </div>
-          )}
+      <div className="OtherProfile">
+        <div className="profileHeader">
+          <div className="profile">
+            {profile.profile.profileImage ? (
+              <div>
+                <img
+                  src={`/${profile.profile.profileImage.split("\\")[1]}`}
+                  onClick={() => setImage(!image)}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+            ) : (
+              <div onClick={() => setImage(!image)}>
+                <i className="fas fa-user-alt fa-4x"></i>
+              </div>
+            )}
+          </div>
 
           <div className="profileDetail">
             <div className="profileDetail1">
@@ -109,19 +114,19 @@ const Profile = ({
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="profilePosts">
-        {profile.post.map((p) => (
-          <div
-            className="userProfile"
-            style={{
-              background: `url('/${
-                p.image.split("\\")[1]
-              }') no-repeat center/cover`,
-            }}
-          ></div>
-        ))}
+        <div className="profilePosts">
+          {profile.post.map((p) => (
+            <div
+              className="userProfile"
+              style={{
+                background: `url('/${
+                  p.image.split("\\")[1]
+                }') no-repeat center/cover`,
+              }}
+            ></div>
+          ))}
+        </div>
       </div>
 
       {image && (
