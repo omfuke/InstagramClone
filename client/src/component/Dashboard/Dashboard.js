@@ -10,6 +10,7 @@ import "./Dashboard.css";
 import axios from "axios";
 import { getPosts } from "../../actions/post";
 import Post from "../Post/Post";
+import Upload from "../../layout/Upload";
 
 const Dashboard = ({
   logout,
@@ -59,6 +60,7 @@ const Dashboard = ({
     const res = await axios.post("/api/post", formData);
     return <Redirect to="/dashboard" />;
   };
+  const props = { setPost, onChangeHandler, postHandler };
 
   return (
     <Fragment>
@@ -92,57 +94,7 @@ const Dashboard = ({
           )}
         </div>
       </div>
-      {post && (
-        <div className="postModal">
-          <div className="postModal1">
-            <p>Create Post</p>
-            <i
-              className="fas fa-times-circle fa-2x"
-              onClick={() => setPost(false)}
-            ></i>
-          </div>
-          <div className="postModal2">
-            <label htmlFor="files" className="btn btn-primary">
-              Upload
-            </label>
-            <input
-              onChange={(e) => onChangeHandler(e)}
-              id="files"
-              type="file"
-              style={{ display: "none" }}
-            />
-          </div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => postHandler()}
-          >
-            post
-          </button>
-        </div>
-      )}
-
-      {/* <div className="posts">
-        <h1 onClick={logOutHandler}>Logout</h1>
-        {loading ? (
-          <img src={spinner} width="100" height="100" alt="om" />
-        ) : (
-          <div>
-            <h1>hello</h1>
-            {profile && <h1>{profile.name}</h1>}
-          </div>
-        )}
-
-        {!profile ? (
-          <Link to="/create-profile" className="Button">
-            Create Profile
-          </Link>
-        ) : (
-          <Link to="/edit-profile" className="Button">
-            Edit Profile
-          </Link>
-        )}
-      </div> */}
+      {post && <Upload {...props} />}
     </Fragment>
   );
 };

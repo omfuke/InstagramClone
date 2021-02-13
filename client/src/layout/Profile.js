@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../actions/profile";
 import "./profile.css";
-import Upload from "./Upload";
+
 import { Redirect } from "react-router";
 import axios from "axios";
 
@@ -118,13 +118,21 @@ const Profile = ({
         <div className="profilePosts">
           {profile.post.map((p) => (
             <div
-              className="userProfile"
+              className="profilePosts1"
               style={{
                 background: `url('/${
                   p.image.split("\\")[1]
                 }') no-repeat center/cover`,
               }}
-            ></div>
+            >
+              <div className="profilePosts2">
+                <i
+                  style={{ color: "white", marginRight: "0.5em" }}
+                  class="fas fa-heart"
+                ></i>
+                {p.likes.length}
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -16,6 +16,8 @@
   flex-direction: column;
   align-self: center;
   margin-bottom: 2em;
+
+  cursor: pointer;
 }
 .postItem1 {
   text-align: center;
