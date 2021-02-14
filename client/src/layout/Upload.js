@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-const Upload = () => {
+const Upload = ({ setPost }) => {
   const [file, setFile] = useState(null);
   const [files, setFiles] = useState(null);
   const [upImg, setUpImg] = useState();
@@ -85,6 +85,7 @@ const Upload = () => {
         formData.append("file", files);
 
         const res = await axios.post("/api/post", formData, config);
+        setPost(false);
       },
       "image/jpeg",
       1
@@ -102,7 +103,7 @@ const Upload = () => {
         onChange={(c) => setCrop(c)}
         onComplete={(c) => setCompletedCrop(c)}
       />
-      <div>
+      <div style={{ display: "none" }}>
         <canvas
           ref={previewCanvasRef}
           // Rounding is important so the canvas width and height matches/is a multiple for sharpness.

@@ -89,7 +89,7 @@ const Dashboard = ({
           )}
         </div>
       </div>
-      {post && <Upload />}
+      {post && <Upload setPost={setPost} />}
     </Fragment>
   );
 };
