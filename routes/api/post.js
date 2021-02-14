@@ -34,9 +34,8 @@ router.get("/", auth, async (req, res) => {
 
 router.post("/", [auth, upload.single("file")], async (req, res) => {
   try {
-    console.log(req.file);
     const posts = await User.findById(req.user.id).select("-password");
-
+    console.log(req.file);
     const newPost = new Post({
       image: req.file.path,
       user: req.user.id,

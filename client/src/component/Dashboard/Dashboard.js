@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, useState } from "react";
 import { logout, clearProfile } from "../../actions/auth";
 import { connect } from "react-redux";
-import spinner from "./833.gif";
+
 import { Redirect, Link } from "react-router-dom";
 import { getCurrentProfile } from "../../actions/profile";
 import Navbar from "../../layout/Navbar";
@@ -23,7 +23,6 @@ const Dashboard = ({
   posts,
 }) => {
   const [post, setPost] = useState(false);
-  const [file, setFile] = useState(null);
 
   if (posts) {
     const images = posts.filter((p) => p.length > 0);
@@ -45,26 +44,22 @@ const Dashboard = ({
     return <Redirect to="/" />;
   }
 
-  const onChangeHandler = async (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  const postHandler = async () => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const res = await axios.post("/api/post", formData);
-    return <Redirect to="/dashboard" />;
-  };
-  const props = { setPost, onChangeHandler, postHandler };
-
   return (
     <Fragment>
       <Navbar />
+      {post && (
+        <div
+          onClick={() => setPost(!post)}
+          style={{
+            position: "fixed",
+            zIndex: "9",
+            backgroundColor: "rgb(0,0,0,0.3)",
+            top: "0",
+            width: "100%",
+            height: "100%",
+          }}
+        ></div>
+      )}
       <div className="posts">
         <div className="post">
           <div className="postItem">
@@ -94,7 +89,7 @@ const Dashboard = ({
           )}
         </div>
       </div>
-      {post && <Upload {...props} />}
+      {post && <Upload />}
     </Fragment>
   );
 };

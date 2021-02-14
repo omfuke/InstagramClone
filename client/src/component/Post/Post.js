@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { updateLikes } from "../../actions/post";
 import { connect } from "react-redux";
+import { imageClipper } from "image-clipper";
 
 const Post = ({ detail, updateLikes, user, post }) => {
   const url = detail.image.split("\\")[1];
@@ -52,9 +53,10 @@ const Post = ({ detail, updateLikes, user, post }) => {
       </div>
       <div className="postCard2">
         <img
+          id="preview"
           src={`/${url}`}
           style={{
-            backgroundImage: `url(/${url})`,
+            //  backgroundImage: `url(/${url})`,
 
             width: "100%",
             height: "100%",

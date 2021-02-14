@@ -11,6 +11,7 @@
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "image-clipper": "^0.4.4",
     "postcss": "^7.0.35",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

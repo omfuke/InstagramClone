@@ -65,3 +65,17 @@
   font-size: 1.25rem;
   color: red;
 }
+
+.postModal {
+  position: fixed;
+  width: 70vw;
+  border: 1px solid #e8e8e8;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+}
