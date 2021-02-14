@@ -58,9 +58,10 @@
   flex-flow: row wrap;
 }
 
-.header2 div {
+.OProfileImg1 {
   height: 33vh;
   flex: 0 1 30%;
+
   margin: 0.5em;
   border: 1px solid #e8e8e8;
   position: relative;
@@ -68,8 +69,20 @@
   background-position: center center;
 }
 
-.OProfileImg {
+.OProfileImg1:hover .OProfileImg2 {
+  position: absolute;
+  top: 0;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.OProfileImg2 {
+  display: none;
 }

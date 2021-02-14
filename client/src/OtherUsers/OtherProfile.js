@@ -79,11 +79,25 @@ const OtherProfile = ({
             {profile.otherProfilePosts && (
               <div className="header2">
                 {profile.otherProfilePosts.map((p) => (
-                  <div>
-                    <img
+                  <div
+                    className="OProfileImg1"
+                    style={{
+                      background: `url('/${
+                        p.image.split("\\")[1]
+                      }') no-repeat center/cover`,
+                    }}
+                  >
+                    {/* <img
                       className="OProfileImg"
                       src={`/${p.image.split("\\")[1]}`}
-                    />
+                    /> */}
+                    <div className="OProfileImg2">
+                      <i
+                        style={{ color: "white", marginRight: "0.5em" }}
+                        class="fas fa-heart"
+                      ></i>
+                      {p.likes.length}
+                    </div>
                   </div>
                 ))}
               </div>

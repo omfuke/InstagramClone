@@ -11,10 +11,11 @@ const Upload = ({ setPost }) => {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
-  const [crop, setCrop] = useState({ unit: "%", width: 30, aspect: 16 / 9 });
+  const [crop, setCrop] = useState({ unit: "%", width: 100, height: 100 });
   const [completedCrop, setCompletedCrop] = useState(null);
 
   const onChangeHandler = async (e) => {
+    setFiles(true);
     if (e.target.files.length > 0) {
       setFile(e.target.files[0]);
       console.log(file);
@@ -94,55 +95,87 @@ const Upload = ({ setPost }) => {
     return <Redirect to="/profile" />;
   };
   return (
-    <div className="postModal">
-      <ReactCrop
-        // style={{ width: "50%", height: "50%" }}
-        src={upImg}
-        onImageLoaded={onLoad}
-        crop={crop}
-        onChange={(c) => setCrop(c)}
-        onComplete={(c) => setCompletedCrop(c)}
-      />
-      <div style={{ display: "none" }}>
-        <canvas
-          ref={previewCanvasRef}
-          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
-          style={{
-            width: Math.round(completedCrop?.width ?? 0),
-            height: Math.round(completedCrop?.height ?? 0),
-          }}
-        />
+    <>
+      <div className="postModal">
+        {files && (
+          <ReactCrop
+            style={{
+              width: "50vw",
+              height: "50vh",
+              overflow: "auto",
+              overflowX: "hidden",
+              marginBottom: "1em",
+            }}
+            src={upImg}
+            onImageLoaded={onLoad}
+            crop={crop}
+            onChange={(c) => setCrop(c)}
+            onComplete={(c) => setCompletedCrop(c)}
+          />
+        )}
+
+        <div style={{ display: "none" }}>
+          <canvas
+            ref={previewCanvasRef}
+            // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
+            style={{
+              width: Math.round(completedCrop?.width ?? 0),
+              height: Math.round(completedCrop?.height ?? 0),
+            }}
+          />
+        </div>
+
+        <div className="postModal2">
+          <label
+            htmlFor="files"
+            style={{
+              padding: "0.5em",
+              borderRadius: "2%",
+              backgroundColor: "skyblue",
+              color: "white",
+              cursor: "pointer",
+            }}
+          >
+            Upload
+          </label>
+          <input
+            onChange={(e) => onChangeHandler(e)}
+            id="files"
+            type="file"
+            style={{ display: "none" }}
+          />
+        </div>
+        <div className="postModal3">
+          {files ? (
+            <div
+              style={{
+                backgroundColor: "lightgreen",
+                padding: "0.5em",
+                borderRadius: "2%",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                postHandler(previewCanvasRef.current, completedCrop)
+              }
+            >
+              post
+            </div>
+          ) : (
+            <div
+              style={{
+                backgroundColor: "tomato",
+                padding: "0.5em",
+                borderRadius: "2%",
+                cursor: "pointer",
+              }}
+              onClick={() => setPost(false)}
+            >
+              close
+            </div>
+          )}
+        </div>
       </div>
-      <div className="postModal1">
-        <p style={{ borderBottom: "1px solid #e8e8e8", margin: "1em" }}>
-          Create Post
-        </p>
-      </div>
-      <div className="postModal2">
-        <label
-          htmlFor="files"
-          style={{
-            backgroundColor: "blue",
-            color: "white",
-          }}
-        >
-          Upload
-        </label>
-        <input
-          onChange={(e) => onChangeHandler(e)}
-          id="files"
-          type="file"
-          style={{ display: "none" }}
-        />
-      </div>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => postHandler(previewCanvasRef.current, completedCrop)}
-      >
-        post
-      </button>
-    </div>
+    </>
   );
 };
 
