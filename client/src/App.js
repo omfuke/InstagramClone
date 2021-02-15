@@ -14,6 +14,7 @@ import Profile from "./layout/Profile";
 import AllProfiles from "./layout/AllProfiles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import OtherProfile from "./OtherUsers/OtherProfile";
+import PostDetail from "./component/Post/PostDetail";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -37,6 +38,7 @@ const App = () => {
           <Route exact path="/all-profiles" component={AllProfiles} />
           <Route exact path="/profile/:name" component={OtherProfile} />
         </Switch>
+        <Route exact path="/post/:postId" component={PostDetail} />
       </Router>
     </Provider>
   );

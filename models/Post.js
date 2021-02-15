@@ -30,6 +30,9 @@ const userPost = new mongoose.Schema({
       comment: {
         type: String,
       },
+      name: {
+        type: String,
+      },
     },
   ],
 

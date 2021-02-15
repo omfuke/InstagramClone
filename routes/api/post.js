@@ -75,8 +75,13 @@ router.post("/comment/:postId", auth, async (req, res) => {
   console.log(`comment here ${postId}`);
 
   const post = await Post.findById(req.params.postId);
+  const profile = await Profile.findOne({ user: req.user.id });
 
-  post.comments.unshift({ user: req.user.id, comment: req.body.comment });
+  post.comments.unshift({
+    user: req.user.id,
+    name: profile.name,
+    comment: req.body.comment,
+  });
   await post.save();
 
   return res.json(post);

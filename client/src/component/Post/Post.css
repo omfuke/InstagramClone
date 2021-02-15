@@ -45,10 +45,14 @@
   border-top: 1px solid #e8e8e8;
   padding: 1em;
 }
-.postCard4 input:focus {
+.postCard4 textarea:focus {
   outline: none;
 }
 
 .postCard4 div {
   display: flex;
+}
+
+.comments {
+  padding: 1em;
 }

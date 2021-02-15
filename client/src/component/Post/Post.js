@@ -102,9 +102,63 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
           Likes {detail.likes.length}
         </div>
       </div>
+      {detail.comments.length > 3 ? (
+        <div className="comments">
+          <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
+            <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
+              {detail.comments[0].name}
+              {"  "}
+            </span>
+            {detail.comments[0].comment}
+          </div>
+
+          <Link
+            to="/post/123"
+            style={{
+              color: "#8e8e8e",
+              fontSize: "0.8rem",
+              wordWrap: "break-word",
+            }}
+          >
+            view all {detail.comments.length} comments
+          </Link>
+          <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
+            <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
+              {detail.comments[1].name}
+              {"  "}
+            </span>
+            {detail.comments[1].comment}
+          </div>
+          <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
+            <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
+              {detail.comments[2].name}
+              {"  "}
+            </span>
+            {detail.comments[2].comment}
+          </div>
+        </div>
+      ) : (
+        <div className="comments">
+          {detail.comments.map((p) => (
+            <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
+              <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
+                {p.name}
+                {"  "}
+              </span>
+              {p.comment}
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="postCard4">
         <div>
-          <input
+          <textarea
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                e.preventDefault();
+              }
+            }}
             onChange={(e) => onChangeHandler(e)}
             type="text"
             placeholder="Add a comment"
@@ -113,8 +167,9 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
               border: "none",
               display: "inline",
               flexBasis: "80%",
+              overflowWrap: "break-word",
             }}
-          ></input>
+          ></textarea>
           <button
             onClick={(e) => onPostHandler(e)}
             style={{
