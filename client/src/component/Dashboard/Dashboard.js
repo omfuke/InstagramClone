@@ -7,7 +7,7 @@ import { getCurrentProfile } from "../../actions/profile";
 import Navbar from "../../layout/Navbar";
 import Spinner from "../../Spinner/Spinner";
 import "./Dashboard.css";
-import axios from "axios";
+
 import { getPosts } from "../../actions/post";
 import Post from "../Post/Post";
 import Upload from "../../layout/Upload";

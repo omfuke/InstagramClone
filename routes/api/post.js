@@ -70,6 +70,18 @@ router.post("/user", auth, async (req, res) => {
   res.json(profile);
 });
 
+router.post("/comment/:postId", auth, async (req, res) => {
+  const postId = req.params.postId;
+  console.log(`comment here ${postId}`);
+
+  const post = await Post.findById(req.params.postId);
+
+  post.comments.unshift({ user: req.user.id, comment: req.body.comment });
+  await post.save();
+
+  return res.json(post);
+});
+
 router.get("/like/:postId", auth, async (req, res) => {
   const post = await Post.findById(req.params.postId);
 

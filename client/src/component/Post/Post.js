@@ -5,14 +5,41 @@ import axios from "axios";
 import { updateLikes } from "../../actions/post";
 import { connect } from "react-redux";
 import { imageClipper } from "image-clipper";
+import { getPosts } from "../../actions/post";
 
-const Post = ({ detail, updateLikes, user, post }) => {
+const Post = ({ detail, updateLikes, user, post, getPosts }) => {
   const url = detail.image.split("\\")[1];
   const [User, setUser] = useState(null);
   const [userImg, setUserImg] = useState(null);
+  const [comment, setComment] = useState("");
 
   const like =
     detail.likes.filter((l) => l.user === user._id).length > 0 ? true : false;
+
+  const onChangeHandler = (e) => {
+    setComment(e.target.value);
+  };
+
+  const onPostHandler = async (e) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ comment });
+    if (comment) {
+      const response = await axios.post(
+        `/api/post/comment/${detail._id}`,
+        body,
+        config
+      );
+      console.log(response.data);
+      setComment("");
+      getPosts();
+    } else {
+      return;
+    }
+  };
 
   useEffect(async () => {
     const config = {
@@ -75,6 +102,34 @@ const Post = ({ detail, updateLikes, user, post }) => {
           Likes {detail.likes.length}
         </div>
       </div>
+      <div className="postCard4">
+        <div>
+          <input
+            onChange={(e) => onChangeHandler(e)}
+            type="text"
+            placeholder="Add a comment"
+            value={comment}
+            style={{
+              border: "none",
+              display: "inline",
+              flexBasis: "80%",
+            }}
+          ></input>
+          <button
+            onClick={(e) => onPostHandler(e)}
+            style={{
+              display: "inline",
+              flexBasis: "20%",
+              backgroundColor: "white",
+              color: comment ? "blue" : "skyblue",
+              border: "none",
+              cursor: comment ? "pointer" : "default",
+            }}
+          >
+            Post
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -86,4 +141,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateLikes })(Post);
+export default connect(mapStateToProps, { updateLikes, getPosts })(Post);
