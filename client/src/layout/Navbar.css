@@ -15,6 +15,7 @@
 
 .nav {
   position: fixed;
+  z-index: 15;
   top: 0;
   overflow: hidden;
   width: 100vw;
@@ -26,16 +27,4 @@
   padding: 2em;
   margin: auto;
   display: flex;
-
-  /* display: flex;
-  
-
-  justify-content: center;
-  background-color: rgb(255, 255, 255);
-  position: fixed;
-  box-sizing: border-box;
-  top: 0;
-  height: 54px;
-  width: 100vw;
-  border-bottom: 1px solid #e8e8e8; */
 }

@@ -32,6 +32,14 @@ router.get("/", auth, async (req, res) => {
   return res.json(post);
 });
 
+router.get("/otherPost/:postId", auth, async (req, res) => {
+  // const profile = await Profile.findOne({ user: req.user.id });
+  const post = await Post.findById(req.params.postId);
+  console.log(post);
+
+  return res.json(post);
+});
+
 router.post("/", [auth, upload.single("file")], async (req, res) => {
   try {
     const posts = await User.findById(req.user.id).select("-password");

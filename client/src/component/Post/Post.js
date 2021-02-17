@@ -102,54 +102,18 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
           Likes {detail.likes.length}
         </div>
       </div>
-      {detail.comments.length > 3 ? (
-        <div className="comments">
-          <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
-            <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
-              {detail.comments[0].name}
-              {"  "}
-            </span>
-            {detail.comments[0].comment}
-          </div>
 
-          <Link
-            to="/post/123"
-            style={{
-              color: "#8e8e8e",
-              fontSize: "0.8rem",
-              wordWrap: "break-word",
-            }}
-          >
-            view all {detail.comments.length} comments
-          </Link>
+      <div className="comments">
+        {detail.comments.map((p) => (
           <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
             <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
-              {detail.comments[1].name}
+              {p.name}
               {"  "}
             </span>
-            {detail.comments[1].comment}
+            {p.comment}
           </div>
-          <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
-            <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
-              {detail.comments[2].name}
-              {"  "}
-            </span>
-            {detail.comments[2].comment}
-          </div>
-        </div>
-      ) : (
-        <div className="comments">
-          {detail.comments.map((p) => (
-            <div style={{ fontSize: "0.8rem", wordWrap: "break-word" }}>
-              <span style={{ fontWeight: "700", fontSize: "0.8rem" }}>
-                {p.name}
-                {"  "}
-              </span>
-              {p.comment}
-            </div>
-          ))}
-        </div>
-      )}
+        ))}
+      </div>
 
       <div className="postCard4">
         <div>
