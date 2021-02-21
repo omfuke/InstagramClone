@@ -4,12 +4,15 @@ import "./Register.css";
 import { connect } from "react-redux";
 import { register } from "../../actions/auth";
 
-const Register = ({ register, isAuthencticated }) => {
+const Register = ({ register, isAuthencticated, error }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const emailErr = error && error.filter((e) => e.param === "email");
+  const passErr = error && error.filter((e) => e.param === "password");
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -50,6 +53,8 @@ const Register = ({ register, isAuthencticated }) => {
               placeholder="email"
               onChange={(e) => onChange(e)}
             ></input>
+            {error && <p>{error[0].msg}</p>}
+
             <input
               className="input"
               type="text"
@@ -88,7 +93,10 @@ const Register = ({ register, isAuthencticated }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { isAuthencticated: state.auth.isAuthencticated };
+  return {
+    isAuthencticated: state.auth.isAuthencticated,
+    error: state.auth.error,
+  };
 };
 
 export default connect(mapStateToProps, { register })(Register);
