@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import FacebookLogin from "react-facebook-login";
+import axios from "axios";
 
 const Auth = ({ login, isAuthencticated }) => {
   const [formData, setFormData] = useState({
@@ -25,14 +26,6 @@ const Auth = ({ login, isAuthencticated }) => {
   if (isAuthencticated) {
     return <Redirect to="/dashboard" />;
   }
-
-  const componentClicked = () => {
-    console.log("Clicked");
-  };
-
-  const responseFacebook = (response) => {
-    console.log(response);
-  };
 
   return (
     <div className="container0">
@@ -66,14 +59,6 @@ const Auth = ({ login, isAuthencticated }) => {
           </Link>
         </div>
       </div>
-      <FacebookLogin
-        appId="5282315515142668"
-        autoLoad={true}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
-      />
-      ,
     </div>
   );
 };

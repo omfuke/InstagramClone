@@ -9,6 +9,7 @@ import {
 import NavBar from "../layout/Navbar";
 import Spinner from "../Spinner/Spinner";
 import "./OtherProfile.css";
+import PersonImg from "./l60Hf.png";
 
 const OtherProfile = ({
   match,
@@ -36,15 +37,29 @@ const OtherProfile = ({
             <div className="header1">
               <div className="oProfile1">
                 <div>
-                  <img
-                    src={`/${profile.otherProfile.profileImage.split("\\")[1]}`}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "50%",
-                    }}
-                  />
+                  {profile.otherProfile.profileImage ? (
+                    <img
+                      src={`/${
+                        profile.otherProfile.profileImage.split("\\")[1]
+                      }`}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={PersonImg}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  )}
                 </div>
               </div>
               <div className="oProfile2">

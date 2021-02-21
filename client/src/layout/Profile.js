@@ -70,6 +70,22 @@ const Profile = ({
   return (
     <>
       <Navbar />
+      {image && (
+        <div
+          onClick={() => {
+            setImage(!image);
+            setP(false);
+          }}
+          style={{
+            position: "fixed",
+            zIndex: "9",
+            backgroundColor: "rgb(0,0,0,0.3)",
+            top: "0",
+            width: "100%",
+            height: "100%",
+          }}
+        ></div>
+      )}
       <div className="OtherProfile">
         <div className="profileHeader">
           <div className="profile">
@@ -93,26 +109,39 @@ const Profile = ({
             )}
           </div>
 
-          <div className="profileDetail">
-            <div className="profileDetail1">
-              <span className="profileUser" style={{ marginLeft: "1em" }}>
-                {user.name}
-              </span>
-              <Link to="/create-profile">
-                <span className="btn btn-primary" style={{ marginLeft: "1em" }}>
-                  Create Profile
+          {profile.profile && profile.post && (
+            <div className="profileDetail">
+              <div className="profileDetail1">
+                <span className="profileUser" style={{ marginLeft: "1em" }}>
+                  {user.name}
                 </span>
-              </Link>
+                <Link to="/create-profile">
+                  <span
+                    className="btn btn-primary"
+                    style={{ marginLeft: "1em" }}
+                  >
+                    Create Profile
+                  </span>
+                </Link>
+              </div>
+              <div>
+                <span style={{ marginLeft: "1em" }}>
+                  {profile.post.length} : posts
+                </span>
+                <span style={{ marginLeft: "2em" }}>
+                  {profile.profile.followers.length} : followers
+                </span>
+                <span style={{ marginLeft: "2em" }}>
+                  {profile.profile.following.length} : following
+                </span>
+              </div>
+              <div>
+                {profile.profile.bio && (
+                  <p style={{ marginLeft: "1em" }}>{profile.profile.bio}</p>
+                )}
+              </div>
             </div>
-            <div>
-              <span style={{ marginLeft: "1em" }}>0 : posts</span>
-              <span style={{ marginLeft: "2em" }}>0 : followers</span>
-              <span style={{ marginLeft: "2em" }}>0 : following</span>
-            </div>
-            <div>
-              <p style={{ marginLeft: "1em" }}>VJTIAN messi of VJTI</p>
-            </div>
-          </div>
+          )}
         </div>
 
         <div className="profilePosts">
@@ -141,7 +170,16 @@ const Profile = ({
         <div className="uploadImg">
           <div className="uploadImg1">
             <div>
-              <label htmlFor="files" className="btn btn-primary">
+              <label
+                htmlFor="files"
+                style={{
+                  padding: "0.5em",
+                  borderRadius: "2%",
+                  backgroundColor: "skyblue",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+              >
                 Upload
               </label>
               <input
@@ -152,22 +190,64 @@ const Profile = ({
               />
             </div>
             <div>
-              <button
-                className="btn btn-primary"
+              <div
+                style={{
+                  backgroundColor: "tomato",
+                  padding: "0.5em",
+                  borderRadius: "2%",
+                  cursor: "pointer",
+                }}
                 onClick={() => setImage(!image)}
               >
                 Close
-              </button>
+              </div>
             </div>
           </div>
         </div>
       )}
       {p && (
-        <div className="uploadImg2">
-          <button className="btn btn-primary" onClick={() => showImage()}>
-            upload
-          </button>
+        <div className="uploadImg">
+          <div className="uploadImg1">
+            <div>
+              <label
+                htmlFor="files"
+                style={{
+                  padding: "0.5em",
+                  borderRadius: "2%",
+                  backgroundColor: "skyblue",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+              >
+                Upload
+              </label>
+              <input
+                onChange={(e) => onChangeHandler(e)}
+                id="files"
+                type="file"
+                style={{ display: "none" }}
+              />
+            </div>
+            <div>
+              <div
+                style={{
+                  backgroundColor: "lightgreen",
+                  padding: "0.5em",
+                  borderRadius: "2%",
+                  cursor: "pointer",
+                }}
+                onClick={() => showImage()}
+              >
+                Set Image
+              </div>
+            </div>
+          </div>
         </div>
+        // <div className="uploadImg2">
+        //   <button className="btn btn-primary" onClick={() => showImage()}>
+        //     upload
+        //   </button>
+        // </div>
       )}
     </>
   );

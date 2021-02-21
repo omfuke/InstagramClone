@@ -146,9 +146,8 @@
   z-index: 10;
   transform: translate(-50%, -50%);
   width: 25vw;
-  height: 25vh;
+
   background-color: white;
-  border-radius: 2em;
 }
 
 .uploadImg1 {
@@ -166,7 +165,6 @@
   z-index: 11;
   transform: translate(-50%, -50%);
   width: 25vw;
-  height: 25vh;
+
   background-color: white;
-  border-radius: 2em;
 }
