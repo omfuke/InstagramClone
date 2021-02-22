@@ -48,9 +48,18 @@ export const register = ({ name, email, password }) => async (dispatch) => {
     dispatch(loadUser());
   } catch (err) {
     console.log(err.response.data);
+    const error = {};
+    error.email = err.response.data.errors.filter(
+      (e) => e.param === "email"
+    )[0];
+    error.password = err.response.data.errors.filter(
+      (e) => e.param === "password"
+    )[0];
+    error.name = err.response.data.errors.filter((e) => e.param === "name")[0];
+    console.log(error);
     dispatch({
       type: REGISTER_FAIL,
-      payload: err.response.data.errors,
+      payload: error,
     });
   }
 };

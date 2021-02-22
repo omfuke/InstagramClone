@@ -11,12 +11,10 @@ const Register = ({ register, isAuthencticated, error }) => {
     password: "",
   });
 
-  const emailErr = error && error.filter((e) => e.param === "email");
-  const passErr = error && error.filter((e) => e.param === "password");
-
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const { name, email, password } = formData;
 
   const onSubmit = (e) => {
@@ -30,55 +28,81 @@ const Register = ({ register, isAuthencticated, error }) => {
   }
 
   return (
-    <div>
-      <div className="container2">
-        <h1>Instagram Clone</h1>
-        <p
-          style={{
-            textAlign: "center",
-            color: "#8e8e8e",
-            fontSize: "17px",
-            margin: "0 40px 10px",
-          }}
-        >
-          Sign up to see photos and videos from your friends.
-        </p>
-        <div className="box">
-          <form onSubmit={(e) => onSubmit(e)}>
-            <input
-              className="input"
-              type="email"
-              name="email"
-              value={email}
-              placeholder="email"
-              onChange={(e) => onChange(e)}
-            ></input>
-            {error && <p>{error[0].msg}</p>}
+    <>
+      <div className="register">
+        <div className="container2">
+          <h1>Instagram Clone</h1>
+          <p
+            style={{
+              textAlign: "center",
+              color: "#8e8e8e",
+              fontSize: "17px",
+              margin: "1em  1em",
+            }}
+          >
+            Sign up to see photos and videos from your friends.
+          </p>
+          <div>
+            <form>
+              <input
+                className="regInp"
+                type="email"
+                name="email"
+                value={email}
+                placeholder="email"
+                onChange={(e) => onChange(e)}
+              ></input>
+              {error && (
+                <div className="inputVal">
+                  {error.email != undefined && error.email.msg}
+                </div>
+              )}
 
-            <input
-              className="input"
-              type="text"
-              name="name"
-              value={name}
-              placeholder="username"
-              onChange={(e) => onChange(e)}
-            ></input>
-            <input
-              className="input"
-              type="password"
-              name="password"
-              value={password}
-              placeholder="password"
-              onChange={(e) => onChange(e)}
-            ></input>
+              <input
+                className="regInp"
+                type="text"
+                name="name"
+                value={name}
+                placeholder="username"
+                onChange={(e) => onChange(e)}
+              ></input>
+              {error && (
+                <div className="inputVal">
+                  {error.name != undefined && error.name.msg}
+                </div>
+              )}
+              <input
+                className="regInp"
+                type="password"
+                name="password"
+                value={password}
+                placeholder="password"
+                onChange={(e) => onChange(e)}
+              ></input>
+              {error && (
+                <div className="inputVal">
+                  {error.password != undefined && error.password.msg}
+                </div>
+              )}
 
-            <button type="submit">Sign up</button>
-          </form>
+              <div
+                style={{
+                  backgroundColor: "skyblue",
+                  textAlign: "center",
+                  width: "70%",
+                  margin: "1em auto",
+                }}
+                onClick={(e) => onSubmit(e)}
+              >
+                Sign up
+              </div>
+            </form>
+          </div>
+          <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
+            By signing up, you agree to our Terms , Data Policy and Cookies
+            Policy .
+          </p>
         </div>
-        <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
-          By signing up, you agree to our Terms , Data Policy and Cookies Policy
-          .
-        </p>
       </div>
       <div className="container3">
         <div>
@@ -88,7 +112,7 @@ const Register = ({ register, isAuthencticated, error }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

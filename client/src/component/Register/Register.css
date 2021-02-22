@@ -1,4 +1,4 @@
-.container2 {
+/* .container2 {
   width: 380px;
   height: 430px;
   border: 1px solid #e8e8e8;
@@ -16,4 +16,51 @@
   box-sizing: border-box;
   text-align: center;
   margin-top: 12px;
+} */
+
+.register {
+  margin: 2em auto;
+  width: 25vw;
+  border: 1px solid #e8e8e8;
+}
+
+.container2 {
+  margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container2 h1 {
+  font-family: myFirstFont;
+  text-align: center;
+}
+.regInp {
+  display: block;
+  background-color: #fafafa;
+  border: 1px solid #e8e8e8;
+  height: 2em;
+  width: 70%;
+  padding: 0.2rem;
+  margin: 0.5em auto;
+}
+
+.container3 {
+  width: 25vw;
+
+  border: 1px solid #e8e8e8;
+  margin: 2em auto;
+}
+
+.container3 div {
+  box-sizing: border-box;
+  text-align: center;
+  padding: 1em;
+}
+
+.inputVal {
+  font-size: 0.7rem;
+  margin: 0 auto;
+  width: 70%;
+  color: tomato;
 }
