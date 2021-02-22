@@ -14,3 +14,4 @@ export const FOLLOW_PROFILE = "FOLLOW_PROFILE";
 export const GET_POSTS = "GET_POSTS";
 export const UPDATE_LIKES = "UPDATE_LIKES";
 export const UNFOLLOW_PROFILE = "UNFOLLOW_PROFILE";
+export const CLEAN_UP = "CLEAN_UP";

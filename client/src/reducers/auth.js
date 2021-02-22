@@ -6,6 +6,7 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
+  CLEAN_UP,
 } from "../actions/types";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   loading: true,
   user: null,
   error: null,
+  errorMsg: null,
 };
 
 export default function (state = initialState, action) {
@@ -41,9 +43,19 @@ export default function (state = initialState, action) {
         loading: false,
         error: payload,
       };
-
-    case AUTH_ERROR:
     case LOGIN_FAIL:
+      return {
+        ...state,
+        token: null,
+        isAuthencticated: false,
+        loading: false,
+        errorMsg: payload,
+      };
+
+    case CLEAN_UP:
+      return { ...state, error: null, errorMsg: null };
+    case AUTH_ERROR:
+
     case LOGOUT:
       localStorage.removeItem("token");
 

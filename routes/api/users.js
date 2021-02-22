@@ -35,17 +35,8 @@ router.post(
 
       user = new User({ name, email, password });
       console.log(user);
-      // const salt = await bcrypt.genSalt(10);
-      // user.password = await bcrypt.hash(password, salt);
-
-      bcrypt.genSalt(10, function (err, salt) {
-        bcrypt.hash(password, salt, function (err, hash) {
-          if (err) {
-            res.send(err);
-          }
-          user.password = hash;
-        });
-      });
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
 
       await user.save();
       const payload = {

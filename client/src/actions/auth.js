@@ -7,6 +7,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_PROFILE,
+  CLEAN_UP,
 } from "../actions/types";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
@@ -83,7 +84,7 @@ export const login = (email, password) => async (dispatch) => {
     dispatch(loadUser());
   } catch (err) {
     console.log(err);
-    dispatch({ type: LOGIN_FAIL });
+    dispatch({ type: LOGIN_FAIL, payload: err.response.data.msg });
   }
 };
 
@@ -93,4 +94,8 @@ export const logout = () => (dispatch) => {
 
 export const clearProfile = () => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
+};
+
+export const clean = () => (dispatch) => {
+  dispatch({ type: CLEAN_UP });
 };

@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./Register.css";
 import { connect } from "react-redux";
-import { register } from "../../actions/auth";
+import { register, clean } from "../../actions/auth";
 
-const Register = ({ register, isAuthencticated, error }) => {
+const Register = ({ clean, register, isAuthencticated, error }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    clean();
+  }, []);
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,7 +55,7 @@ const Register = ({ register, isAuthencticated, error }) => {
                 value={email}
                 placeholder="email"
                 onChange={(e) => onChange(e)}
-              ></input>
+              />
               {error && (
                 <div className="inputVal">
                   {error.email != undefined && error.email.msg}
@@ -59,19 +63,21 @@ const Register = ({ register, isAuthencticated, error }) => {
               )}
 
               <input
+                autoComplete={"off"}
                 className="regInp"
                 type="text"
                 name="name"
                 value={name}
                 placeholder="username"
                 onChange={(e) => onChange(e)}
-              ></input>
+              />
               {error && (
                 <div className="inputVal">
                   {error.name != undefined && error.name.msg}
                 </div>
               )}
               <input
+                autoComplete={"off"}
                 className="regInp"
                 type="password"
                 name="password"
@@ -91,6 +97,7 @@ const Register = ({ register, isAuthencticated, error }) => {
                   textAlign: "center",
                   width: "70%",
                   margin: "1em auto",
+                  cursor: "pointer",
                 }}
                 onClick={(e) => onSubmit(e)}
               >
@@ -98,7 +105,14 @@ const Register = ({ register, isAuthencticated, error }) => {
               </div>
             </form>
           </div>
-          <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
+          <p
+            style={{
+              fontSize: "0.8rem",
+              textAlign: "center",
+              width: "70%",
+              margin: "0 auto",
+            }}
+          >
             By signing up, you agree to our Terms , Data Policy and Cookies
             Policy .
           </p>
@@ -123,4 +137,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { register, clean })(Register);
