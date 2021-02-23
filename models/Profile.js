@@ -13,6 +13,7 @@ const userProfile = new mongoose.Schema({
   },
   profileImage: {
     type: String,
+    default: null,
   },
   followers: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "user" } }],
   following: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "user" } }],

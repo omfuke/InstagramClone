@@ -6,6 +6,7 @@ import { updateLikes } from "../../actions/post";
 import { connect } from "react-redux";
 import { imageClipper } from "image-clipper";
 import { getPosts } from "../../actions/post";
+import ProfileImg from "../../OtherUsers/l60Hf.png";
 
 const Post = ({ detail, updateLikes, user, post, getPosts }) => {
   const url = detail.image.split("\\")[1];
@@ -58,10 +59,22 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
   return (
     <div className="postCard">
       <div className="postCard1">
-        {userImg && (
+        {userImg ? (
           <div>
             <img
               src={`/${userImg.split("\\")[1]}`}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
+          </div>
+        ) : (
+          <div>
+            <img
+              src={ProfileImg}
               style={{
                 width: "100%",
                 height: "100%",
@@ -96,10 +109,12 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
         <div
           onClick={() => updateLikes(detail._id, user._id)}
           style={{
-            color: like ? "blue" : "red",
+            backgroundColor: like ? "lightblue" : "tomato",
+            padding: "0.5em",
+            color: like ? "white" : "white",
           }}
         >
-          Likes {detail.likes.length}
+          Likes <span>{detail.likes.length}</span>
         </div>
       </div>
 

@@ -39,12 +39,14 @@ router.get("/", auth, async (req, res) => {
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
-
-    if (profile) {
+    console.log(profile);
+    if (!profile) {
+      profile = new Profile({ user: req.user.id, name: req.user.name });
+      await profile.save();
       return res.status(200).json(profile);
     }
 
-    res.status(200).json(profile);
+    return res.status(200).json(profile);
   } catch {
     res.status(500).send("Server Eroor");
   }

@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../actions/profile";
 import "./profile.css";
-
+import PersonImg from "../OtherUsers/l60Hf.png";
 import { Redirect } from "react-router";
 import axios from "axios";
 
@@ -104,7 +104,15 @@ const Profile = ({
               </div>
             ) : (
               <div onClick={() => setImage(!image)}>
-                <i className="fas fa-user-alt fa-4x"></i>
+                <img
+                  src={PersonImg}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                  }}
+                />
               </div>
             )}
           </div>

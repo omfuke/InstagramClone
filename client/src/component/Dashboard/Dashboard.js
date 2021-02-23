@@ -64,6 +64,7 @@ const Dashboard = ({
         <div className="post">
           <div className="postItem">
             <i
+              style={{ color: "grey" }}
               class="fas fa-plus-square fa-2x"
               onClick={() => setPost(!post)}
             ></i>
@@ -71,12 +72,15 @@ const Dashboard = ({
           {!posts ? (
             <div>
               <div className="postItem1">Posts for you</div>
-              <div className="postItem">
-                <i className="fas fa-camera fa-4x"></i>
+
+              <div className="camera">
+                <i
+                  style={{ color: "grey" }}
+                  className="fas fa-camera fa-4x"
+                ></i>
               </div>
-              <div className="postItem">
-                <div>No Posts Yet</div>
-              </div>
+
+              <div style={{ textAlign: "center" }}>No Posts Yet</div>
             </div>
           ) : (
             <div>

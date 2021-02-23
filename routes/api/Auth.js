@@ -77,7 +77,7 @@ router.post("/forgetPass", async (req, res) => {
   await user.save();
 
   let info = await transporter.sendMail({
-    to: "om.fuke1999@gmail.com",
+    to: email,
     from: "omfuke512@gmail.com",
     subject: "reset password",
     html: `<h1>click below for reset password</h1>

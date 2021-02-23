@@ -24,3 +24,8 @@
   margin-bottom: 4em;
   border-bottom: 1px solid #e8e8e8;
 }
+.camera {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}

@@ -50,14 +50,17 @@ router.post("/", [auth, upload.single("file")], async (req, res) => {
     });
 
     const post = await newPost.save();
-    res.json(post);
+    return res.json(post);
   } catch {
-    res.status(500).send("Server Error");
+    return res.status(500).send("Server Error");
   }
 });
 
 router.get("/posts", auth, async (req, res) => {
   const profile = await Profile.findOne({ user: req.user.id });
+  if (!profile) {
+    return;
+  }
   let images = [];
   for (let index = 0; index < profile.following.length; index++) {
     const element = profile.following[index];

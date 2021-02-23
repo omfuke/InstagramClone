@@ -86,8 +86,18 @@ const OtherProfile = ({
                   )}
                 </div>
                 <div>
-                  posts 0 followers: {profile.otherProfile.followers.length}{" "}
-                  following: {profile.otherProfile.following.length}
+                  {/* posts 0 followers: {profile.otherProfile.followers.length}{" "}
+                  following: {profile.otherProfile.following.length} */}
+
+                  <span style={{ marginLeft: "1em" }}>
+                    {profile.otherProfilePosts.length} : posts
+                  </span>
+                  <span style={{ marginLeft: "1em" }}>
+                    {profile.otherProfile.followers.length} : followers
+                  </span>
+                  <span style={{ marginLeft: "1em" }}>
+                    {profile.otherProfile.following.length} : following
+                  </span>
                 </div>
               </div>
             </div>

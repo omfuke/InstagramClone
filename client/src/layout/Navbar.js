@@ -16,13 +16,19 @@ const Navbar = ({ logout }) => {
         </Link>
         <div className="navlinks">
           <Link className="navlink" to="/all-profiles">
-            <i className="fas fa-globe-asia fa-2x"></i>
+            <i
+              style={{ color: "black" }}
+              className="fas fa-globe-asia fa-2x"
+            ></i>
           </Link>
           <Link className="navlink" to="/profile">
-            <i className="fas fa-user-circle fa-2x"></i>
+            <i
+              style={{ color: "black" }}
+              className="fas fa-user-circle fa-2x"
+            ></i>
           </Link>
           <Link onClick={logOutHandler} className="navlink" to="/profile">
-            <i class="fas fa-sign-out-alt fa-2x"></i>
+            <i style={{ color: "black" }} class="fas fa-sign-out-alt fa-2x"></i>
           </Link>
         </div>
       </div>
