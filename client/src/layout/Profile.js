@@ -123,16 +123,20 @@ const Profile = ({
                 <span className="profileUser" style={{ marginLeft: "1em" }}>
                   {user.name}
                 </span>
-                <Link to="/create-profile">
-                  <span
-                    className="btn btn-primary"
-                    style={{ marginLeft: "1em" }}
-                  >
-                    Create Profile
-                  </span>
+                <Link
+                  style={{
+                    marginLeft: "1em",
+                    border: "1px solid #e8e8e8",
+                    padding: "0.5em",
+                    textDecoration: "none",
+                    color: "black",
+                  }}
+                  to="/edit-profile"
+                >
+                  Edit Profile
                 </Link>
               </div>
-              <div>
+              <div style={{ marginTop: "1em" }}>
                 <span style={{ marginLeft: "1em" }}>
                   {profile.post.length} : posts
                 </span>

@@ -7,7 +7,21 @@ const userProfile = new mongoose.Schema({
   },
   bio: {
     type: String,
+    default: null,
   },
+  nick: {
+    type: String,
+    default: null,
+  },
+  website: {
+    type: String,
+    default: null,
+  },
+  gender: {
+    type: String,
+    default: null,
+  },
+
   name: {
     type: String,
   },

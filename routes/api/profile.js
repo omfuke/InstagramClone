@@ -40,11 +40,11 @@ router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
     console.log(profile);
-    if (!profile) {
-      profile = new Profile({ user: req.user.id, name: req.user.name });
-      await profile.save();
-      return res.status(200).json(profile);
-    }
+    // if (!profile) {
+    //   profile = new Profile({ user: req.user.id, name: req.user.name });
+    //   await profile.save();
+    //   return res.status(200).json(profile);
+    // }
 
     return res.status(200).json(profile);
   } catch {
@@ -106,39 +106,19 @@ router.post("/unfollowProfile", auth, async (req, res) => {
   }
 });
 
-router.post(
-  "/makeProfile",
-  [auth, upload.single("profileImage")],
-  async (req, res) => {
-    const { name, bio } = req.body;
-    const profileImage = req.file;
-    console.log(req.file);
+router.post("/makeProfile", auth, async (req, res) => {
+  console.log("hello");
+  console.log(req.body);
+  const update = req.body;
+  const profile = await Profile.findOneAndUpdate(
+    { user: req.user.id },
+    update,
+    { new: true }
+  );
+  console.log(profile);
 
-    const userProfile = {};
-    userProfile.user = req.user.id;
-    if (name) userProfile.name = name;
-    if (bio) userProfile.bio = bio;
-    if (profileImage) userProfile.profileImage = req.file.path;
-
-    try {
-      let profile = await Profile.findOne({ user: req.user.id });
-      if (profile) {
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          userProfile,
-          { new: true }
-        );
-        return res.status(200).json({ msg: "user updated" });
-      }
-      profile = new Profile(userProfile);
-      await profile.save();
-
-      res.status(200).send(profile);
-    } catch {
-      res.status(500).json({ msg: "server error" });
-    }
-  }
-);
+  return;
+});
 
 router.get("/:name", auth, async (req, res) => {
   const name = req.params.name;
