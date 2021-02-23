@@ -92,7 +92,7 @@ const Profile = ({
             {profile.profile.profileImage ? (
               <div>
                 <img
-                  src={`/${profile.profile.profileImage.split("\\")[1]}`}
+                  src={profile.profile.profileImage}
                   onClick={() => setImage(!image)}
                   style={{
                     width: "100%",
@@ -162,9 +162,7 @@ const Profile = ({
               to={`/post/${p._id}`}
               className="profilePosts1"
               style={{
-                background: `url('/${
-                  p.image.split("\\")[1]
-                }') no-repeat center/cover`,
+                background: `url(${p.image}) no-repeat center/cover`,
               }}
             >
               <div className="profilePosts2">

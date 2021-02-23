@@ -10,6 +10,7 @@ import NavBar from "../layout/Navbar";
 import Spinner from "../Spinner/Spinner";
 import "./OtherProfile.css";
 import PersonImg from "./l60Hf.png";
+import { Link } from "react-router-dom";
 
 const OtherProfile = ({
   match,
@@ -39,9 +40,7 @@ const OtherProfile = ({
                 <div>
                   {profile.otherProfile.profileImage ? (
                     <img
-                      src={`/${
-                        profile.otherProfile.profileImage.split("\\")[1]
-                      }`}
+                      src={profile.otherProfile.profileImage}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -104,12 +103,11 @@ const OtherProfile = ({
             {profile.otherProfilePosts && (
               <div className="header2">
                 {profile.otherProfilePosts.map((p) => (
-                  <div
+                  <Link
+                    to={`/post/${p._id}`}
                     className="OProfileImg1"
                     style={{
-                      background: `url('/${
-                        p.image.split("\\")[1]
-                      }') no-repeat center/cover`,
+                      background: `url(${p.image}) no-repeat center/cover`,
                     }}
                   >
                     {/* <img
@@ -123,7 +121,7 @@ const OtherProfile = ({
                       ></i>
                       {p.likes.length}
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

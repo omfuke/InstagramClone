@@ -9,7 +9,7 @@ import { getPosts } from "../../actions/post";
 import ProfileImg from "../../OtherUsers/l60Hf.png";
 
 const Post = ({ detail, updateLikes, user, post, getPosts }) => {
-  const url = detail.image.split("\\")[1];
+  const url = detail.image;
   const [User, setUser] = useState(null);
   const [userImg, setUserImg] = useState(null);
   const [comment, setComment] = useState("");
@@ -62,7 +62,7 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
         {userImg ? (
           <div>
             <img
-              src={`/${userImg.split("\\")[1]}`}
+              src={userImg}
               style={{
                 width: "100%",
                 height: "100%",
@@ -94,7 +94,7 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
       <div className="postCard2">
         <img
           id="preview"
-          src={`/${url}`}
+          src={url}
           style={{
             //  backgroundImage: `url(/${url})`,
 

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./PostDetail.css";
-import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
+import { connect } from "react-redux";
 
 const PostDetail = ({ match, getCurrentProfile }) => {
   const [post, setPost] = useState(null);
@@ -42,7 +42,7 @@ const PostDetail = ({ match, getCurrentProfile }) => {
         >
           <img
             style={{ objectFit: "contain", height: "100%", maxHeight: "80vh" }}
-            src={`/${post.image.split("\\")[1]}`}
+            src={post.image}
           />
         </div>
       )}

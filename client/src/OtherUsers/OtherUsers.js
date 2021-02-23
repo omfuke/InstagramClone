@@ -9,7 +9,7 @@ const OtherUsers = ({ name, url }) => {
       <div className="UserCardImg">
         {url ? (
           <img
-            src={`/${url.split("\\")[1]}`}
+            src={url}
             style={{
               width: "100%",
               height: "100%",

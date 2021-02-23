@@ -4,26 +4,54 @@ const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const auth = require("../../middleware/auth");
 const Post = require("../../models/Post");
-
+const config = require("../../config/default.json");
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
 const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+aws.config.update(config.awsConfig);
+const s3 = new aws.S3();
+
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "insta-social-clone",
+    acl: "public-read",
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: "Testing Metadata" });
+    },
+    key: function (req, file, cb) {
+      cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
   },
 });
 
-const fileFlter = (req, file, cb) => {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+const singleFileUpload = upload.single("file");
 
-const upload = multer({ storage: storage, fileFilter: fileFlter });
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+//   },
+// });
+
+// const fileFlter = (req, file, cb) => {
+//   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
+// const upload = multer({ storage: storage, fileFilter: fileFlter });
 
 router.get("/", auth, async (req, res) => {
   // const profile = await Profile.findOne({ user: req.user.id });
@@ -40,17 +68,28 @@ router.get("/otherPost/:postId", auth, async (req, res) => {
   return res.json(post);
 });
 
-router.post("/", [auth, upload.single("file")], async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const posts = await User.findById(req.user.id).select("-password");
-    console.log(req.file);
-    const newPost = new Post({
-      image: req.file.path,
-      user: req.user.id,
-    });
 
-    const post = await newPost.save();
-    return res.json(post);
+    singleFileUpload(req, res, async (error) => {
+      if (error) {
+        console.log("error", error);
+      } else {
+        if (req.file === undefined) {
+          console.log("error file not selected");
+        } else {
+          const newPost = new Post({
+            image: req.file.location,
+            user: req.user.id,
+          });
+
+          const post = await newPost.save();
+
+          return res.status(200).json(post);
+        }
+      }
+    });
   } catch {
     return res.status(500).send("Server Error");
   }

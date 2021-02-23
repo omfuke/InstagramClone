@@ -4,26 +4,55 @@ const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const Post = require("../../models/Post");
 const auth = require("../../middleware/auth");
-
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
 const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+const config = require("../../config/default.json");
+aws.config.update(config.awsConfig);
+const s3 = new aws.S3();
+
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "insta-social-clone",
+    acl: "public-read",
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: "Testing Metadata" });
+    },
+    key: function (req, file, cb) {
+      cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
   },
 });
 
-const fileFlter = (req, file, cb) => {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+const singleFileUpload = upload.single("file");
 
-const upload = multer({ storage: storage, fileFilter: fileFlter });
+// const multer = require("multer");
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+//   },
+// });
+
+// const fileFlter = (req, file, cb) => {
+//   if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
+// const upload = multer({ storage: storage, fileFilter: fileFlter });
 
 router.get("/", auth, async (req, res) => {
   try {
@@ -133,24 +162,28 @@ router.get("/:name", auth, async (req, res) => {
   }
 });
 
-router.post("/", [auth, upload.single("file")], async (req, res) => {
-  // const { name, bio } = req.body;
-  // const profileImage = req.file;
-
-  console.log(req.file);
-
+router.post("/", auth, async (req, res) => {
   const userProfile = {};
   userProfile.user = req.user.id;
+  singleFileUpload(req, res, async (error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      if (req.file === undefined) {
+        console.log("error file not selected");
+      } else {
+        try {
+          let profile = await Profile.findOne({ user: req.user.id });
+          profile.profileImage = req.file.location;
+          await profile.save();
 
-  try {
-    let profile = await Profile.findOne({ user: req.user.id });
-    profile.profileImage = req.file.path;
-    await profile.save();
-
-    return res.status(200).json({ msg: "user updated" });
-  } catch {
-    res.status(200).json({ msg: "server error" });
-  }
+          return res.status(200).json({ msg: "user updated" });
+        } catch {
+          res.status(200).json({ msg: "server error" });
+        }
+      }
+    }
+  });
 });
 
 module.exports = router;
