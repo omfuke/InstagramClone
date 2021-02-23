@@ -158,7 +158,8 @@ const Profile = ({
 
         <div className="profilePosts">
           {profile.post.map((p) => (
-            <div
+            <Link
+              to={`/post/${p._id}`}
               className="profilePosts1"
               style={{
                 background: `url('/${
@@ -173,7 +174,7 @@ const Profile = ({
                 ></i>
                 {p.likes.length}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

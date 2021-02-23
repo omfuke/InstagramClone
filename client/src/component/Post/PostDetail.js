@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./PostDetail.css";
+import { connect } from "react-redux";
+import { getCurrentProfile } from "../../actions/profile";
 
-const PostDetail = ({ match }) => {
+const PostDetail = ({ match, getCurrentProfile }) => {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -12,40 +14,40 @@ const PostDetail = ({ match }) => {
       setPost(res.data);
     }
     fetchData();
-  }, []);
+    getCurrentProfile();
+  }, [getCurrentProfile]);
 
   return (
-    <div className="postDetail">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+
+        height: "100vh",
+      }}
+    >
       {post && (
-        <div className="postDetail2">
-          <div className="postDetailImg">
-            <img
-              className="postDetailImg1"
-              src={`/${post.image.split("\\")[1]}`}
-            />
-          </div>
-          <div className="postDetailCom">
-            {post.comments.map((c) => (
-              <div className="comments">
-                <div
-                  style={{
-                    fontSize: "1rem",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  <span style={{ fontWeight: "700", fontSize: "1rem" }}>
-                    {c.name}
-                    {"  "}
-                  </span>
-                  {c.comment}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div
+          style={{
+            maxWidth: "600px",
+
+            height: "80vh",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "black",
+            border: "1px solid #e8e8e8",
+          }}
+        >
+          <img
+            style={{ objectFit: "contain", height: "100%", maxHeight: "80vh" }}
+            src={`/${post.image.split("\\")[1]}`}
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default PostDetail;
+export default connect(null, { getCurrentProfile })(PostDetail);

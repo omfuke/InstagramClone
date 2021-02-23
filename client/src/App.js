@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import OtherProfile from "./OtherUsers/OtherProfile";
 import ForgetPassword from "./component/Register/ForgetPassword";
 import ResetPassword from "./component/Register/ResetPassword";
+import PostDetail from "./component/Post/PostDetail";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -42,7 +43,7 @@ const App = () => {
           <Route exact path="/all-profiles" component={AllProfiles} />
           <Route exact path="/profile/:name" component={OtherProfile} />
         </Switch>
-        {/* <Route exact path="/post/:postId" component={PostDetail} /> */}
+        <Route exact path="/post/:postId" component={PostDetail} />
       </Router>
     </Provider>
   );
