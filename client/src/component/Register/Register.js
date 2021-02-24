@@ -35,7 +35,7 @@ const Register = ({ clean, register, isAuthencticated, error }) => {
     <>
       <div className="register">
         <div className="container2">
-          <h1>Instagram Clone</h1>
+          <h1>Social</h1>
           <p
             style={{
               textAlign: "center",
@@ -44,7 +44,7 @@ const Register = ({ clean, register, isAuthencticated, error }) => {
               margin: "1em  1em",
             }}
           >
-            Sign up to see photos and videos from your friends.
+            Sign up to see photos from your friends.
           </p>
           <div>
             <form>

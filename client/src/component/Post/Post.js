@@ -86,8 +86,12 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
         )}
 
         {User && (
-          <Link to={`/profile/${User}`}>
-            <p>{User}</p>
+          <Link style={{ textDecoration: "none" }} to={`/profile/${User}`}>
+            <p
+              style={{ color: "black", fontSize: "1.2rem", cursor: "pointer" }}
+            >
+              {User}
+            </p>
           </Link>
         )}
       </div>
@@ -112,6 +116,7 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
             backgroundColor: like ? "lightblue" : "tomato",
             padding: "0.5em",
             color: like ? "white" : "white",
+            cursor: "pointer",
           }}
         >
           Likes <span>{detail.likes.length}</span>

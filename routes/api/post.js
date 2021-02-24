@@ -117,7 +117,7 @@ router.get("/posts", auth, async (req, res) => {
 router.post("/user", auth, async (req, res) => {
   const profile = await Profile.findOne({ user: req.body.user });
 
-  res.json(profile);
+  return res.status(200).json(profile);
 });
 
 router.post("/comment/:postId", auth, async (req, res) => {

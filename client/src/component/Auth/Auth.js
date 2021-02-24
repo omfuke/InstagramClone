@@ -35,7 +35,7 @@ const Auth = ({ login, isAuthencticated, error, clean }) => {
     <>
       <div className="register">
         <div className="container2">
-          <h1 className="logo">Instagram Clone</h1>
+          <h1 className="logo">Social</h1>
           <div>
             <form>
               <input

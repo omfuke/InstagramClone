@@ -40,13 +40,14 @@ const Dashboard = ({
     getPosts();
   }, [getCurrentProfile, getPosts]);
 
-  if (!isAuthencticated) {
-    return <Redirect to="/" />;
-  }
+  // if (!isAuthencticated) {
+  //   return <Redirect to="/" />;
+  // }
 
   return (
     <Fragment>
       <Navbar />
+
       {post && (
         <div
           onClick={() => setPost(!post)}
@@ -69,7 +70,7 @@ const Dashboard = ({
               onClick={() => setPost(!post)}
             ></i>
           </div>
-          {!posts ? (
+          {!posts || posts.length == 0 ? (
             <div>
               <div className="postItem1">Posts for you</div>
 

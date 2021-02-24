@@ -63,13 +63,16 @@ const OtherProfile = ({
               </div>
               <div className="oProfile2">
                 <div className="oProfile2D">
-                  <span>{match.params.name}</span>
+                  <span style={{ fontSize: "1.3rem", fontWeight: "600" }}>
+                    {match.params.name}
+                  </span>
                   {profile.otherProfile.followers &&
                   profile.otherProfile.followers.filter(
                     (p) => p.user === user._id
                   ).length > 0 ? (
                     <div
                       className="follow"
+                      style={{ cursor: "pointer" }}
                       onClick={() => unfollowProfile(profile.otherProfile.user)}
                     >
                       Unfollow

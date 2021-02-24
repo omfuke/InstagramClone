@@ -2,17 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { connect } from "react-redux";
-import { logout } from "../actions/auth";
+import { logout, clearProfile } from "../actions/auth";
 
-const Navbar = ({ logout }) => {
+const Navbar = ({ logout, clearProfile }) => {
   const logOutHandler = () => {
     logout();
+    clearProfile();
   };
   return (
     <div className="nav">
       <div className="navbar">
-        <Link className="navhead" to="/">
-          <p>Instagram</p>
+        <Link
+          style={{ textDecoration: "none", cursor: "pointer" }}
+          className="navhead"
+          to="/"
+        >
+          <p>Social</p>
         </Link>
         <div className="navlinks">
           <Link className="navlink" to="/all-profiles">
@@ -36,4 +41,4 @@ const Navbar = ({ logout }) => {
   );
 };
 
-export default connect(null, { logout })(Navbar);
+export default connect(null, { logout, clearProfile })(Navbar);

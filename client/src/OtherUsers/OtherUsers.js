@@ -24,7 +24,16 @@ const OtherUsers = ({ name, url }) => {
         )}
       </div>
       <div className="UserCard">
-        <Link to={`/profile/${name}`} className="card-body">
+        <Link
+          to={`/profile/${name}`}
+          style={{
+            textDecoration: "none",
+            color: "black",
+            fontSize: "1.2rem",
+            cursor: "pointer",
+          }}
+          className="card-body"
+        >
           {name}
         </Link>
       </div>

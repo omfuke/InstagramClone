@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./EditProfile.css";
 import { connect } from "react-redux";
 import axios from "axios";
+import { getCurrentProfile } from "../actions/profile";
+import Spinner from "../Spinner/Spinner";
+import store from "../store";
+import { loadUser } from "../actions/auth";
+import { Redirect } from "react-router";
 
-function EditProfile({ profile }) {
+function EditProfile({ profile, getCurrentProfile }) {
   const [form, setForm] = useState({
-    nick: profile.profile ? profile.profile.nick : "",
-    bio: profile.profile ? profile.profile.bio : "",
-    website: profile.profile ? profile.profile.website : "",
-    gender: profile.profile ? profile.profile.gender : "",
+    nick: "",
+    bio: "",
+    website: "",
+    gender: "",
   });
+
+  useEffect(() => {
+    getCurrentProfile();
+    if (profile) {
+      setForm({
+        nick: profile.profile.nick,
+        bio: profile.profile.bio,
+        website: profile.profile.website,
+        gender: profile.profile.gender,
+      });
+    }
+  }, []);
 
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +48,7 @@ function EditProfile({ profile }) {
   return (
     <div>
       <Navbar />
-      {profile && (
+      {profile ? (
         <div className="setting">
           <div style={{ flexBasis: "30%", borderRight: "1px solid #e8e8e8" }}>
             <div style={{ padding: "1em" }}>Edit Profile</div>
@@ -156,6 +173,8 @@ function EditProfile({ profile }) {
             </div>
           </div>
         </div>
+      ) : (
+        <Spinner />
       )}
     </div>
   );
@@ -166,4 +185,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(EditProfile);
+export default connect(mapStateToProps, { getCurrentProfile })(EditProfile);
