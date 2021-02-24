@@ -11,6 +11,7 @@ const profile = require("./routes/api/profile");
 connectDB();
 
 app.use(cors());
+app.use(express.static("public"));
 
 app.use(express.json({ extended: false }));
 app.use(express.static("uploads"));
