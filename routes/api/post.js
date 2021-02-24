@@ -63,7 +63,6 @@ router.get("/", auth, async (req, res) => {
 router.get("/otherPost/:postId", auth, async (req, res) => {
   // const profile = await Profile.findOne({ user: req.user.id });
   const post = await Post.findById(req.params.postId);
-  console.log(post);
 
   return res.json(post);
 });
@@ -74,10 +73,8 @@ router.post("/", auth, async (req, res) => {
 
     singleFileUpload(req, res, async (error) => {
       if (error) {
-        console.log("error", error);
       } else {
         if (req.file === undefined) {
-          console.log("error file not selected");
         } else {
           const newPost = new Post({
             image: req.file.location,
@@ -122,7 +119,6 @@ router.post("/user", auth, async (req, res) => {
 
 router.post("/comment/:postId", auth, async (req, res) => {
   const postId = req.params.postId;
-  console.log(`comment here ${postId}`);
 
   const post = await Post.findById(req.params.postId);
   const profile = await Profile.findOne({ user: req.user.id });

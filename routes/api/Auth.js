@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log(user.password, isMatch);
+
     if (!isMatch) {
       return res.status(400).json({
         msg:
@@ -61,17 +61,15 @@ router.post("/", async (req, res) => {
       res.json({ token, user });
     });
   } catch (err) {
-    console.error(err);
     res.status(500).send("server error");
   }
 });
 
 router.post("/forgetPass", async (req, res) => {
   const email = req.body.email;
-  console.log("hello", email);
 
   const token = crypto.randomBytes(64).toString("hex");
-  console.log(token);
+
   const user = await User.findOne({ email: email });
   user.token = token;
   await user.save();
@@ -98,7 +96,6 @@ router.post("/resetPass/", async (req, res) => {
 
   await user.save();
 
-  console.log(token);
   return res.status(200).json({ msg: "New password is Set" });
 });
 

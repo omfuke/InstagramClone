@@ -68,7 +68,7 @@ router.get("/", auth, async (req, res) => {
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
-    console.log(profile);
+
     // if (!profile) {
     //   profile = new Profile({ user: req.user.id, name: req.user.name });
     //   await profile.save();
@@ -124,8 +124,6 @@ router.post("/unfollowProfile", auth, async (req, res) => {
       .indexOf(otherProfile);
     profile.following.splice(removeIndex, 1);
 
-    console.log(oProfile);
-
     await profile.save();
     await oProfile.save();
 
@@ -136,15 +134,12 @@ router.post("/unfollowProfile", auth, async (req, res) => {
 });
 
 router.post("/makeProfile", auth, async (req, res) => {
-  console.log("hello");
-  console.log(req.body);
   const update = req.body;
   const profile = await Profile.findOneAndUpdate(
     { user: req.user.id },
     update,
     { new: true }
   );
-  console.log(profile);
 
   return;
 });
@@ -154,7 +149,6 @@ router.get("/:name", auth, async (req, res) => {
   try {
     const userProfile = await Profile.findOne({ name: name });
     const userProfilePosts = await Post.find({ user: userProfile.user });
-    console.log(userProfilePosts);
 
     return res.json({ userProfile, userProfilePosts });
   } catch {
@@ -167,10 +161,8 @@ router.post("/", auth, async (req, res) => {
   userProfile.user = req.user.id;
   singleFileUpload(req, res, async (error) => {
     if (error) {
-      console.log(error);
     } else {
       if (req.file === undefined) {
-        console.log("error file not selected");
       } else {
         try {
           let profile = await Profile.findOne({ user: req.user.id });
