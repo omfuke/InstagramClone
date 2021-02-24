@@ -1,4 +1,4 @@
 node_modules/
-
+*.ttf
 uploads/
 /node_modules
