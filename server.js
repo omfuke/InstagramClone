@@ -2,6 +2,10 @@ const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
 const app = express();
+const users = require("./routes/api/users");
+const auth = require("./routes/api/auth");
+const post = require("./routes/api/post");
+const profile = require("./routes/api/profile");
 // const path = require("path");
 
 connectDB();
@@ -11,14 +15,10 @@ app.use(cors());
 app.use(express.json({ extended: false }));
 app.use(express.static("uploads"));
 
-app.get("/", (req, res) => {
-  return res.json({ hello: "om" });
-});
-
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/auth", require("./routes/api/auth"));
-app.use("/api/profile", require("./routes/api/profile"));
-app.use("/api/post", require("./routes/api/post"));
+app.use("/api/users", users);
+app.use("/api/auth", auth);
+app.use("/api/profile", profile);
+app.use("/api/post", post);
 
 // if (process.env.NODE_ENV === "production") {
 //   // Set static folder
@@ -29,6 +29,6 @@ app.use("/api/post", require("./routes/api/post"));
 //   });
 // }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log("server started"));
+app.listen(PORT);
