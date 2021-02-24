@@ -1,8 +1,12 @@
 {
-  "name": "instagramclone",
+  "name": "social-pics",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
