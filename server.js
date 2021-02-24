@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 app.use(express.json({ extended: false }));
 app.use(express.static("uploads"));
-api.get("/", (req, res) => {
+app.get("/", (req, res) => {
   return res.json({ msg: "mkc" });
 });
 app.use("/api/users", users);
