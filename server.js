@@ -7,7 +7,6 @@ const app = express();
 connectDB();
 
 app.use(cors());
-dotenv.config();
 
 app.use(express.json({ extended: false }));
 app.use(express.static("uploads"));
