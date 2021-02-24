@@ -3,7 +3,7 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 const app = express();
 const users = require("./routes/api/users");
-const auth = require("./routes/api/auth");
+const auth = require("./routes/api/Auth");
 const post = require("./routes/api/post");
 const profile = require("./routes/api/profile");
 // const path = require("path");
@@ -15,7 +15,9 @@ app.use(express.static("public"));
 
 app.use(express.json({ extended: false }));
 app.use(express.static("uploads"));
-
+api.get("/", (req, res) => {
+  return res.json({ msg: "mkc" });
+});
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/profile", profile);
