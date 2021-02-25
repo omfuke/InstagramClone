@@ -26,7 +26,11 @@ function ResetPassword(props) {
     };
     const token = queryString.parse(props.location.search).token;
     const body = JSON.stringify({ email, password1, password2, token });
-    const res = await axios.post("/api/auth/resetPass/", body, config);
+    const res = await axios.post(
+      "https://social-pics.herokuapp.com/api/auth/resetPass/",
+      body,
+      config
+    );
     console.log(res.data.msg);
     setRedirect(true);
   };

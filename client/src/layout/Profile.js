@@ -58,7 +58,10 @@ const Profile = ({
     //     "content-type": "multipart/form-data",
     //   },
     // };
-    const res = await axios.post("/api/profile", formData);
+    const res = await axios.post(
+      "https://social-pics.herokuapp.com/api/profile",
+      formData
+    );
     closeEvent();
     getCurrentProfile();
   };

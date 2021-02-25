@@ -15,3 +15,4 @@ export const GET_POSTS = "GET_POSTS";
 export const UPDATE_LIKES = "UPDATE_LIKES";
 export const UNFOLLOW_PROFILE = "UNFOLLOW_PROFILE";
 export const CLEAN_UP = "CLEAN_UP";
+export const URL = "https://social-pics.herokuapp.com/";

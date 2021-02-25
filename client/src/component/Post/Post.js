@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { updateLikes } from "../../actions/post";
 import { connect } from "react-redux";
-import { imageClipper } from "image-clipper";
+
 import { getPosts } from "../../actions/post";
 import ProfileImg from "../../OtherUsers/l60Hf.png";
 
@@ -30,7 +30,7 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
     const body = JSON.stringify({ comment });
     if (comment) {
       const response = await axios.post(
-        `/api/post/comment/${detail._id}`,
+        `https://social-pics.herokuapp.com/api/post/comment/${detail._id}`,
         body,
         config
       );
@@ -50,11 +50,15 @@ const Post = ({ detail, updateLikes, user, post, getPosts }) => {
     };
     const body = JSON.stringify({ user: detail.user });
 
-    const res = await axios.post("api/post/user", body, config);
+    const res = await axios.post(
+      "https://social-pics.herokuapp.com/api/post/user",
+      body,
+      config
+    );
 
     setUser(res.data.name);
     setUserImg(res.data.profileImage);
-  }, []);
+  }, [detail.user]);
 
   return (
     <div className="postCard">

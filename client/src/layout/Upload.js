@@ -85,7 +85,11 @@ const Upload = ({ setPost }) => {
         const formData = new FormData();
         formData.append("file", files);
 
-        const res = await axios.post("/api/post", formData, config);
+        await axios.post(
+          "https://social-pics.herokuapp.com/api/post",
+          formData,
+          config
+        );
         setPost(false);
       },
       "image/jpeg",

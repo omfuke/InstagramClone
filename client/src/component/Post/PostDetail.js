@@ -9,7 +9,9 @@ const PostDetail = ({ match, getCurrentProfile }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(`/api/post/otherPost/${match.params.postId}`);
+      const res = await axios.get(
+        `https://social-pics.herokuapp.com/api/post/otherPost/${match.params.postId}`
+      );
       console.log(res.data);
       setPost(res.data);
     }

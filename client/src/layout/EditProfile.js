@@ -5,9 +5,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { getCurrentProfile } from "../actions/profile";
 import Spinner from "../Spinner/Spinner";
-import store from "../store";
-import { loadUser } from "../actions/auth";
-import { Redirect } from "react-router";
 
 function EditProfile({ profile, getCurrentProfile }) {
   const [form, setForm] = useState({
@@ -27,7 +24,7 @@ function EditProfile({ profile, getCurrentProfile }) {
         gender: profile.profile.gender,
       });
     }
-  }, []);
+  }, [getCurrentProfile]);
 
   const onChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -41,7 +38,11 @@ function EditProfile({ profile, getCurrentProfile }) {
       },
     };
     const body = JSON.stringify({ nick, bio, website, gender });
-    await axios.post("/api/profile/makeProfile", body, config);
+    await axios.post(
+      "https://social-pics.herokuapp.com/api/profile/makeProfile",
+      body,
+      config
+    );
   };
 
   const { nick, bio, website, gender } = form;

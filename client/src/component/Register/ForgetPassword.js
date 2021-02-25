@@ -16,7 +16,11 @@ function ForgetPassword() {
     };
     const body = JSON.stringify({ email });
 
-    await axios.post("/api/auth/forgetPass", body, config);
+    await axios.post(
+      "https://social-pics.herokuapp.com/api/auth/forgetPass",
+      body,
+      config
+    );
   };
   return (
     <>
